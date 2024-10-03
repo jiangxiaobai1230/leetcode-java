@@ -1,12 +1,34 @@
 package src.danDiaoStack;
 
+import java.util.Stack;
+
 /**
  * @author: Yuan Yuqing
  * @date: 2024-09-26 20:10
  */
 public class No739 {
     public int[] dailyTemperatures(int[] temperatures) {
+        int len=temperatures.length;
+        int[] res=new int[len];
+        Stack<Integer> stack=new Stack<>();
+        stack.push(0);
+        int index=0;
+        for(int i=1;i<len;i++){
+            if(temperatures[stack.peek()]>=temperatures[i]){
+                stack.push(i);
+            }
+            else {
+                while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+                    index = stack.peek();
+                    res[index]=i-index;
+                    stack.pop();
+                }
+                stack.push(i);
+            }
 
+        }
+
+        return res;
     }
 
     public static void main(String[] args) {
