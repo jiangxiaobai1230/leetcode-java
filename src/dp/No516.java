@@ -6,7 +6,9 @@ package src.dp;
  */
 public class No516 {
 
-    public int longestPalindromeSubseq(String s) {
+
+
+    public static void main(String[] args) {    public int longestPalindromeSubseq(String s) {
         int len=s.length();
         int[][] dp=new int[len][len];
         for(int i=len-1;i>=0;i--){
@@ -21,8 +23,6 @@ public class No516 {
         return dp[0][len-1];
 
     }
-
-    public static void main(String[] args) {
         //示例 1：
         //
         //输入：s = "bbbab"
