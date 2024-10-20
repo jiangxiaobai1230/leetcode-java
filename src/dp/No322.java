@@ -15,7 +15,7 @@ public class No322 {
         int[][] dp=new int[amount+1][len+1];
 //        final int inf = 1 << 30;
         final int inf = Integer.MAX_VALUE-1;
-        for (var g : dp) {
+        for (int[] g : dp) {
             Arrays.fill(g, inf);
         }
         dp[0][0]=0;
