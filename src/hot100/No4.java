@@ -1,4 +1,4 @@
-package src.slide;
+package src.hot100;
 
 import java.util.HashMap;
 import java.util.Map;
