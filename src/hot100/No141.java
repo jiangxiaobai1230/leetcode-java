@@ -1,23 +1,36 @@
 package src.hot100;
 
-import src.LinkNode.ListNode;
+import src.hot100.ListNode;
 
 /**
  * @author: Yuan Yuqing
  * @date: 2025-01-12 23:32
  */
 public class No141 {
+
     public boolean hasCycle(ListNode head) {
-        if(head==null||head.next==null)return false;
-        ListNode slow=head,fast=head;
-        while (fast!=null&&fast.next!=null){
-            slow=slow.next;
+        if(head==null)return false;
+        ListNode low=head,fast=head.next;
+        while (fast!=null&&fast.next!=null&&fast!=low){
             fast=fast.next.next;
-            if(slow==fast)return true;
+            low=low.next;
         }
+        if(fast==low)return true;
         return false;
 
     }
+
+//    public boolean hasCycle(ListNode head) {
+//        if(head==null||head.next==null)return false;
+//        ListNode slow=head,fast=head;
+//        while (fast!=null&&fast.next!=null){
+//            slow=slow.next;
+//            fast=fast.next.next;
+//            if(slow==fast)return true;
+//        }
+//        return false;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：
