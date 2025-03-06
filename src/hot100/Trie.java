@@ -22,46 +22,40 @@ public class Trie {
     }
 
     public void insert(String word) {
-        TrieNode cur=root;
-        for(char c:word.toCharArray()){
-            c-='a';
-            if(cur.children[c]==null) {
-                cur.children[c] = new TrieNode();
+        TrieNode head=root;
+        for(int i=0;i<word.length();i++){
+            if(head.children[word.charAt(i)-'a']==null) {
+                head.children[word.charAt(i) - 'a'] = new TrieNode();
             }
-            cur=cur.children[c];
+            head=head.children[word.charAt(i)-'a'];
         }
-        cur.isEnd=true;
-
+        head.isEnd=true;
 
     }
 
     public boolean search(String word) {
-        int res=find(word);
-        if(res==2)return true;
+        if(find(word)==2)return true;
         return false;
 
     }
 
     public boolean startsWith(String prefix) {
-        int res=find(prefix);
-        if(res!=0)return true;
-        return false;
+        if(find(prefix)!=-1)return true;
+        else return false;
+
 
     }
-    public int find(String prefix) {
-        TrieNode cur=root;
-        for(char c:prefix.toCharArray()){
-            c-='a';
-            if(cur.children[c]==null)return 0;
-            cur=cur.children[c];
+    private int find(String word){
+        TrieNode head=root;
+        for(int i=0;i<word.length();i++){
+            if(head.children[word.charAt(i)-'a']==null)return -1;
+            head=head.children[word.charAt(i)-'a'];
         }
-        if(cur.isEnd) {
-            return 2;
-        } else {
-            return 1;
-        }
+        if(head.isEnd)return 2;
+        return 1;
 
     }
+
 
     public static void main(String[] args) {
         //示例：
@@ -81,13 +75,43 @@ public class Trie {
         //trie.insert("app");
         //trie.search("app");     // 返回 True
         //
+//        Trie trie = new Trie();
+//        trie.insert("apple");
+//        trie.search("apple");   // 返回 True
+//        trie.search("app");     // 返回 False
+//        trie.startsWith("app"); // 返回 True
+//        trie.insert("app");
+//        trie.search("app");     // 返回 True
+
+        //["Trie","insert","insert","insert","insert","insert","insert","search","search","search","search","search","search","search","search","search","startsWith","startsWith","startsWith","startsWith","startsWith","startsWith","startsWith","startsWith","startsWith"]
+        //[[],["app"],["apple"],["beer"],["add"],["jam"],["rental"],["apps"],["app"],["ad"],["applepie"],["rest"],["jan"],["rent"],["beer"],["jam"],["apps"],["app"],["ad"],["applepie"],["rest"],["jan"],["rent"],["beer"],["jam"]]
+
         Trie trie = new Trie();
-        trie.insert("apple");
-        trie.search("apple");   // 返回 True
-        trie.search("app");     // 返回 False
-        trie.startsWith("app"); // 返回 True
         trie.insert("app");
-        trie.search("app");     // 返回 True
+        trie.insert("apple");
+        trie.insert("beer");
+        trie.insert("add");
+        trie.insert("jam");
+        trie.insert("rental");
+        System.out.println(trie.search("apps"));
+        System.out.println(trie.search("app"));
+        System.out.println(trie.search("ad"));
+        System.out.println(trie.search("applepie"));
+
+        System.out.println(trie.search("rest"));
+        System.out.println(trie.search("jan"));
+        System.out.println(trie.search("rent"));
+        System.out.println(trie.search("beer"));
+        System.out.println(trie.search("jam"));
+        System.out.println(trie.startsWith("apps"));
+        System.out.println(trie.startsWith("app"));
+        System.out.println(trie.startsWith("ad"));
+        System.out.println(trie.startsWith("applepie"));
+        System.out.println(trie.startsWith("rest"));
+        System.out.println(trie.startsWith("jan"));
+        System.out.println(trie.startsWith("rent"));
+        System.out.println(trie.startsWith("beer"));
+        System.out.println(trie.startsWith("jam"));
 
 
 
