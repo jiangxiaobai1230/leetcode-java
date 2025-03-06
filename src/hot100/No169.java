@@ -7,21 +7,38 @@ package src.hot100;
 public class No169 {
 
     public int majorityElement(int[] nums) {
-        int len=nums.length;
+        int n=nums.length;
         int num=nums[0],count=1;
-        for(int i=1;i<len;i++){
-            if(nums[i]==num){
-                count++;
-            }else {
+        for(int i=1;i<n;i++){
+            if(nums[i]!=num){
                 count--;
                 if(count==0){
-                    num=nums[i];
                     count=1;
+                    num=nums[i];
                 }
-            }
+            }else count++;
         }
         return num;
+
     }
+
+
+//    public int majorityElement(int[] nums) {
+//        int len=nums.length;
+//        int num=nums[0],count=1;
+//        for(int i=1;i<len;i++){
+//            if(nums[i]==num){
+//                count++;
+//            }else {
+//                count--;
+//                if(count==0){
+//                    num=nums[i];
+//                    count=1;
+//                }
+//            }
+//        }
+//        return num;
+//    }
 
     public static void main(String[] args) {
         //示例 1：
