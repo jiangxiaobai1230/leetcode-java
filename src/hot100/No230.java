@@ -10,6 +10,7 @@ public class No230 {
 
     //https://leetcode.cn/problems/kth-smallest-element-in-a-bst/solutions/2361685/230-er-cha-sou-suo-shu-zhong-di-k-xiao-d-n3he/?envType=study-plan-v2&envId=top-100-liked
 
+
     int k,res;
     public int kthSmallest(TreeNode root, int k) {
         this.k=k;
@@ -20,14 +21,30 @@ public class No230 {
     void dfs(TreeNode node){
         if(node==null)return;
         dfs(node.left);
-        if(k==0){
-            return;
-        }
-        if(--k==0){
-            res=node.getVal();
-        }
-        dfs(node.right);
+        k--;
+        if(k==0)res=node.getVal();
+        if(k>0)dfs(node.right);
+
     }
+
+//    int k,res;
+//    public int kthSmallest(TreeNode root, int k) {
+//        this.k=k;
+//        dfs(root);
+//        return res;
+//
+//    }
+//    void dfs(TreeNode node){
+//        if(node==null)return;
+//        dfs(node.left);
+//        if(k==0){
+//            return;
+//        }
+//        if(--k==0){
+//            res=node.getVal();
+//        }
+//        dfs(node.right);
+//    }
 
     public static void main(String[] args) {
         //输入：root = [3,1,4,null,2], k = 1

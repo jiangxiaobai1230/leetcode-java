@@ -10,44 +10,68 @@ public class No20 {
 
     public boolean isValid(String s) {
 
-        Stack stack=new Stack<>();
-        stack.push('#');
-        int n=s.length();
-        if(n%2!=0){
-            return false;
-        }
-        for(int i=0;i<n;i++){
+
+        Stack<Character> stack=new Stack<>();
+        int len=s.length();
+        if(len%2!=0)return false;
+        int i=0;
+        boolean flag=true;
+        while (i<len){
             char c=s.charAt(i);
-            if(c=='('||c=='['||c=='{'){
-                stack.push(c);
-            } else if (c==')') {
-                if(stack.peek().equals('(')){
-                    stack.pop();
-                }else return false;
+            if(c==')'){
+                if(stack.isEmpty()||stack.pop()!='(')flag=false;
+            } else if (c==']') {
+                if(stack.isEmpty()||stack.pop()!='[')flag=false;
 
-            }
-            else if (c==']') {
-                if(stack.peek().equals('[')){
-                    stack.pop();
-                }else return false;
+            }else if (c=='}') {
+                if(stack.isEmpty()||stack.pop()!='{')flag=false;
 
-            }
-            else if (c=='}') {
-                if(stack.peek().equals('{')){
-                    stack.pop();
-                }else return false;
-
-            }
-
-
+            }else stack.add(c);
+            i++;
         }
-        if(stack.peek().equals('#')){
-            return true;
-        }
-        return false;
-
-
+        return flag==true&&stack.isEmpty();
     }
+
+//    public boolean isValid(String s) {
+//
+//        Stack stack=new Stack<>();
+//        stack.push('#');
+//        int n=s.length();
+//        if(n%2!=0){
+//            return false;
+//        }
+//        for(int i=0;i<n;i++){
+//            char c=s.charAt(i);
+//            if(c=='('||c=='['||c=='{'){
+//                stack.push(c);
+//            } else if (c==')') {
+//                if(stack.peek().equals('(')){
+//                    stack.pop();
+//                }else return false;
+//
+//            }
+//            else if (c==']') {
+//                if(stack.peek().equals('[')){
+//                    stack.pop();
+//                }else return false;
+//
+//            }
+//            else if (c=='}') {
+//                if(stack.peek().equals('{')){
+//                    stack.pop();
+//                }else return false;
+//
+//            }
+//
+//
+//        }
+//        if(stack.peek().equals('#')){
+//            return true;
+//        }
+//        return false;
+//
+//
+//    }
     public static void main(String[] args) {
 
         //给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效。

@@ -10,53 +10,119 @@ import java.util.List;
  */
 public class No15 {
 
-
     public List<List<Integer>> threeSum(int[] nums) {
-
-        int sum, len = nums.length;
-        List<List<Integer>> res = new ArrayList<>();
         Arrays.sort(nums);
-        if (nums[0] > 0||len==0) {
-            return res;
-        }
-        for(int k=0;k<len-2;k++){
-            int i=k+1;
-            int j=len-1;
+        List<List<Integer>> res=new ArrayList<>();
+        int n=nums.length;
+        for(int i=0;i<n-2;i++){
+            int num=nums[i];
+            if(i>0&&num==nums[i-1])continue;
+            if(num+nums[i+1]+nums[i+2]>0)continue;
+            if(num+nums[n-1]+nums[n-2]<0)continue;
+            int j=i+1,k=n-1;
+            while (j<n-1&&k>j){
+                if(num+nums[j]+nums[k]<0){
+                    j++;
+                    while (j<n-1&&nums[j-1]==nums[j]) j++;
+                }else if(num+nums[j]+nums[k]>0){
+                    k--;
+                    while (k>j&&nums[k]==nums[k+1]) k--;
+                }else {
+                    res.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
+                    j++;
+                    while (j<n-1&&nums[j-1]==nums[j]) j++;
+                    k--;
+                    while (k>j&&nums[k]==nums[k+1]) k--;
 
-            if(k>0&& nums[k]==nums[k-1]){
-                continue;
+                }
             }
-            while(i<j){
-                while(i-1!=k&&i<j&&nums[i]==nums[i-1]){
-                    i++;
-                }
-                while(j>i&&j<len-1&&nums[j]==nums[j+1]){
-                    j--;
-                }
-                if(i>=j){
-                    continue;
-                }
-                sum=nums[i]+nums[j]+nums[k];
-
-                if(sum>0){
-                    j--;
-                }else if(sum<0){
-                    i++;
-                }else{
-                    res.add(Arrays.asList(nums[k],nums[i],nums[j]));
-                    i++;
-                    j--;
-                }
-
-            }
-
         }
-
-
-
-
         return res;
+
     }
+
+//    public List<List<Integer>> threeSum(int[] nums) {
+//        Arrays.sort(nums);
+//        List<List<Integer>> res=new ArrayList<>();
+//        int n=nums.length;
+//        for(int i=0;i<n-2;i++){
+//            int num=nums[i];
+//            if(i>0&&num==nums[i-1])continue;
+//            if(num+nums[i+1]+nums[i+2]>0)continue;
+//            if(num+nums[n-2]+nums[n-1]<0)continue;
+//            int j=i+1,k=n-1;
+//            while (j<=n-2&&j<k) {
+//                int sum = num + nums[j] + nums[k];
+//                if (sum > 0) {
+//                    k--;
+//                } else if (sum < 0) {
+//                    j++;
+//                } else {
+//                    res.add(new ArrayList<>(Arrays.asList(nums[i], nums[j], nums[k])));
+//                    k--;
+//                    j++;
+//                    while (j<=n-2&&nums[j-1]==nums[j]){
+//                        j++;
+//                    }
+//                    while (k>j&&nums[k+1]==nums[k]){
+//                        k--;
+//                    }
+//                }
+//            }
+//
+//
+//        }
+//
+//        return res;
+//    }
+
+
+//    public List<List<Integer>> threeSum(int[] nums) {
+//
+//        int sum, len = nums.length;
+//        List<List<Integer>> res = new ArrayList<>();
+//        Arrays.sort(nums);
+//        if (nums[0] > 0||len==0) {
+//            return res;
+//        }
+//        for(int k=0;k<len-2;k++){
+//            int i=k+1;
+//            int j=len-1;
+//
+//            if(k>0&& nums[k]==nums[k-1]){
+//                continue;
+//            }
+//            while(i<j){
+//                while(i-1!=k&&i<j&&nums[i]==nums[i-1]){
+//                    i++;
+//                }
+//                while(j>i&&j<len-1&&nums[j]==nums[j+1]){
+//                    j--;
+//                }
+//                if(i>=j){
+//                    continue;
+//                }
+//                sum=nums[i]+nums[j]+nums[k];
+//
+//                if(sum>0){
+//                    j--;
+//                }else if(sum<0){
+//                    i++;
+//                }else{
+//                    res.add(Arrays.asList(nums[k],nums[i],nums[j]));
+//                    i++;
+//                    j--;
+//                }
+//
+//            }
+//
+//        }
+//
+//
+//
+//
+//        return res;
+//    }
 
     public static void main(String[] args) {
         //示例 1：
@@ -83,7 +149,7 @@ public class No15 {
 
 
         No15 no15 = new No15();
-        int[] nums = new int[]{2,-3,0,-2,-5,-5,-4,1,2,-2,2,0,2,-4};
+        int[] nums = new int[]{2,-3,0,-2,-5,-5,-4,1,2,-2,2,0,2,-4,5,5,-10};
         List<List<Integer>> lists = no15.threeSum(nums);
 
         for (List<Integer> list : lists) {

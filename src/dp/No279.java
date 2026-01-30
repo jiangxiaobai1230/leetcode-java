@@ -8,6 +8,21 @@ import java.util.Arrays;
  */
 public class No279 {
 
+    public int numSquares(int n) {
+        if(n==1)return 1;
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,10001);
+        dp[0]=0;
+        for(int i=1;i<=Math.sqrt(n)+1;i++){
+            int x=i*i;
+            for(int j=x;j<=n;j++){
+                dp[j]=Math.min(dp[j],dp[j-x]+1);
+            }
+        }
+        return dp[n];
+    }
+
+
 //    public int numSquares(int n) {
 //        int[][] dp=new int[101][n+1];
 //        int[] nums=new int[101];
@@ -37,19 +52,19 @@ public class No279 {
 //    }
 
 
-    public int numSquares(int n) {
-        int[] dp=new int[n+1];
-        if(n==1)return 1;
-        Arrays.fill(dp,10001);
-        dp[0]=0;
-        for(int i=1;i<=Math.sqrt(n)+1;i++){
-            int x=i*i;
-            for(int j=x;j<=n;j++){
-                dp[j]=Math.min(dp[j],dp[j-x]+1);
-            }
-        }
-        return dp[n];
-    }
+//    public int numSquares(int n) {
+//        int[] dp=new int[n+1];
+//        if(n==1)return 1;
+//        Arrays.fill(dp,10001);
+//        dp[0]=0;
+//        for(int i=1;i<=Math.sqrt(n)+1;i++){
+//            int x=i*i;
+//            for(int j=x;j<=n;j++){
+//                dp[j]=Math.min(dp[j],dp[j-x]+1);
+//            }
+//        }
+//        return dp[n];
+//    }
 
     public static void main(String[] args) {
         //示例 1：

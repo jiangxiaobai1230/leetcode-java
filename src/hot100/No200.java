@@ -7,32 +7,60 @@ package src.hot100;
 public class No200 {
     //https://leetcode.cn/problems/number-of-islands/solutions/16884/number-of-islands-shen-du-you-xian-bian-li-dfs-or-/?envType=study-plan-v2&envId=top-100-liked
     //第一反应dfs
+
+
     public int numIslands(char[][] grid) {
         int count=0;
-        for(int i=0;i<grid.length;i++){
-            for(int j=0;j<grid[0].length;j++){
-                if(grid[i][j]=='1'){
+        int m=grid.length,n=grid[0].length;
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(grid[i][j] == '1'){
                     dfs(grid,i,j);
                     count++;
                 }
 
             }
         }
-        return count;
+      return count;
 
     }
     void dfs(char[][] grid,int i,int j){
-        if(!isArea(grid,i,j))return;
-        if(grid[i][j]!='0') {
-            grid[i][j] = '0';
-            dfs(grid, i - 1, j);
-            dfs(grid, i + 1, j);
-            dfs(grid, i, j - 1);
-            dfs(grid, i, j + 1);
+        if(isArea(grid,i,j)&&grid[i][j] == '1') {
+            grid[i][j]=0;
+            dfs(grid,i+1,j);
+            dfs(grid,i-1,j);
+            dfs(grid,i,j+1);
+            dfs(grid,i,j-1);
+
         }
 
-
     }
+//    public int numIslands(char[][] grid) {
+//        int count=0;
+//        for(int i=0;i<grid.length;i++){
+//            for(int j=0;j<grid[0].length;j++){
+//                if(grid[i][j]=='1'){
+//                    dfs(grid,i,j);
+//                    count++;
+//                }
+//
+//            }
+//        }
+//        return count;
+//
+//    }
+//    void dfs(char[][] grid,int i,int j){
+//        if(!isArea(grid,i,j))return;
+//        if(grid[i][j]!='0') {
+//            grid[i][j] = '0';
+//            dfs(grid, i - 1, j);
+//            dfs(grid, i + 1, j);
+//            dfs(grid, i, j - 1);
+//            dfs(grid, i, j + 1);
+//        }
+//
+//
+//    }
     boolean isArea(char[][] grid,int i,int j){
         return i>=0&&i<grid.length&&j>=0&&j<grid[0].length;
 

@@ -6,20 +6,31 @@ package src.BinaryTree;
  */
 public class No101 {
 
-    public boolean isSymmetric(TreeNode root) {
 
+    public boolean isSymmetric(TreeNode root) {
         return root==null||isSymmetricTree(root.left,root.right);
     }
     public Boolean isSymmetricTree(TreeNode left,TreeNode right){
-
         if(left==null&&right==null)return true;
-        else if (left==null || right==null) {
-            return false;
-        }else if(left.val==right.val){
-            return isSymmetricTree(left.right,right.left)&&isSymmetricTree(left.left,right.right);
-        }
+        if(left==null||right==null)return false;
+        if(left.val==right.val&&isSymmetricTree(left.right,right.left)&&isSymmetricTree(left.left,right.right))return true;
         return false;
     }
+
+//    public boolean isSymmetric(TreeNode root) {
+//
+//        return root==null||isSymmetricTree(root.left,root.right);
+//    }
+//    public Boolean isSymmetricTree(TreeNode left,TreeNode right){
+//
+//        if(left==null&&right==null)return true;
+//        else if (left==null || right==null) {
+//            return false;
+//        }else if(left.val==right.val){
+//            return isSymmetricTree(left.right,right.left)&&isSymmetricTree(left.left,right.right);
+//        }
+//        return false;
+//    }
 
     public static void main(String[] args) {
 

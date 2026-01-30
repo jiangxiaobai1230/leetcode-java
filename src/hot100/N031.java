@@ -5,33 +5,35 @@ package src.hot100;
  * @date: 2025-02-14 23:50
  */
 public class N031 {
+
     public void nextPermutation(int[] nums) {
         int n=nums.length;
-        int k=n-1;
-        while (k>=1&&nums[k-1]>=nums[k])k--;
-        if(k==0){
-            reverse(nums,0,n-1);
-        }else {
-            int index=k;
-            for(int i=k+1;i<n;i++){
-                if(nums[i]>nums[k-1]){
-                    if(nums[index]>=nums[i])index=i;
-                }
+        if(n==1)return;
+        int index=n-1;
+        //从右到左找到非递增
+        for(int i=n-2;i>=0;i--){
+            if(nums[i]<nums[i+1]){
+                index=i;
+                break;
             }
-
-            if(k==n-1){
-                reverse(nums,k-1,k);
+        }
+        //找到这个数后从右到左比它大的第一个数，交换
+        for(int i=n-1;i>=index+1;i--){
+            if(nums[i]>nums[index]){
+                swap(nums,i,index);
+                break;
             }
-            else {
-                swap(nums,k-1,index);
-                reverse(nums,k,n-1);
-            }
-
         }
 
+        //后面的递增排序.也就是反转
+        reverse(nums,index+1,n-1);
+        if(index==n-1)reverse(nums,0,n-1);
+
+
     }
+
     void reverse(int[] nums,int i,int j){
-        while (i<=j){
+        while (i<j){
             swap(nums,i,j);
             i++;
             j--;

@@ -1,43 +1,62 @@
 package src.BinaryTree;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author: Yuan Yuqing
  * @date: 2024-04-04 23:14
  */
 public class No102 {
+
     public List<List<Integer>> levelOrder(TreeNode root) {
 
         List<List<Integer>> res=new ArrayList<>();
-
-
-        Deque<TreeNode> deque=new LinkedList<>();
         if(root==null)return res;
-        deque.offer(root);
-        while (deque.size()!=0) {
-            int len=deque.size();
-            List<Integer> tempList = new ArrayList<>();
-            while (len != 0) {
-
-                TreeNode node = deque.pop();
-                tempList.add(node.val);
-                len--;
-                if (node.left != null) deque.offer(node.left);
-                if (node.right != null) deque.offer(node.right);
-
-
+        Queue<TreeNode> queue=new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            List<Integer> floor=new ArrayList<>();
+            int size=queue.size();
+            for(int i=0;i<size;i++){
+                TreeNode node=queue.poll();
+                floor.add(node.val);
+                if(node.left!=null)queue.add(node.left);
+                if(node.right!=null)queue.add(node.right);
             }
-            res.add(tempList);
+            res.add(new ArrayList<>(floor));
+
         }
 
         return res;
-
-
     }
+//    public List<List<Integer>> levelOrder(TreeNode root) {
+//
+//        List<List<Integer>> res=new ArrayList<>();
+//
+//
+//        Deque<TreeNode> deque=new LinkedList<>();
+//        if(root==null)return res;
+//        deque.offer(root);
+//        while (deque.size()!=0) {
+//            int len=deque.size();
+//            List<Integer> tempList = new ArrayList<>();
+//            while (len != 0) {
+//
+//                TreeNode node = deque.pop();
+//                tempList.add(node.val);
+//                len--;
+//                if (node.left != null) deque.offer(node.left);
+//                if (node.right != null) deque.offer(node.right);
+//
+//
+//            }
+//            res.add(tempList);
+//        }
+//
+//        return res;
+//
+//
+//    }
 
     public static void main(String[] args) {
 

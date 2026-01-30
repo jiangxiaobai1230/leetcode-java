@@ -2,6 +2,7 @@ package src.Stack;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * @author: Yuan Yuqing
@@ -9,36 +10,88 @@ import java.util.LinkedList;
  */
 public class No239 {
 
-
     public int[] maxSlidingWindow(int[] nums, int k) {
         int n=nums.length;
-        if(k>n){
-            return new int[0];
-        }
         int[] res=new int[n-k+1];
-        Deque<Integer> deque=new LinkedList<>();
-
-        for(int i=0;i<k;i++){
-            while(!deque.isEmpty() && deque.peekLast()<nums[i]){
-                deque.removeLast();
+        Deque<Integer> queue=new LinkedList<>();
+        for(int i=0;i<k-1;i++){
+            while (!queue.isEmpty()&&queue.peekLast()<nums[i]){
+                queue.pollLast();
             }
-            deque.addLast(nums[i]);
+            queue.addLast(nums[i]);
         }
-        res[0]=deque.peek();
-
-        for(int i=k;i<n;i++){
-            if(deque.peek()==nums[i-k]){
-                deque.removeFirst();
+        for(int i=k-1;i<n;i++){
+            while (!queue.isEmpty()&&queue.peekLast()<nums[i]){
+                queue.pollLast();
             }
-
-            while (!deque.isEmpty() && deque.peekLast()<nums[i]){
-                deque.removeLast();
+            queue.addLast(nums[i]);
+            res[i-k+1]= queue.peekFirst();
+            if(!queue.isEmpty()&&queue.peekFirst()==nums[i-k+1]){
+                queue.pollFirst();
             }
-            deque.addLast(nums[i]);
-            res[i-k+1]=deque.peek();
         }
         return res;
     }
+
+
+
+//    public int[] maxSlidingWindow(int[] nums, int k) {
+//        int n=nums.length;
+//        int[] res=new int[n-k+1];
+//        int index=0;
+//        Deque<Integer> queue=new LinkedList<>();
+//        for(int i=0;i<k-1;i++){
+//            while (!queue.isEmpty()&&nums[queue.peekLast()]<nums[i]){
+//                queue.pollLast();
+//            }
+//            queue.addLast(i);
+//        }
+//        for(int i=k-1;i<n;i++){
+//            while (!queue.isEmpty()&&nums[queue.peekLast()]<nums[i]){
+//                queue.pollLast();
+//            }
+//            queue.addLast(i);
+//            res[index++]= nums[queue.peekFirst()];
+//            if(queue.peekFirst()==i-k+1){
+//                queue.removeFirst();
+//            }
+//
+//        }
+//
+//        return res;
+//
+//    }
+//
+
+//    public int[] maxSlidingWindow(int[] nums, int k) {
+//        int n=nums.length;
+//        if(k>n){
+//            return new int[0];
+//        }
+//        int[] res=new int[n-k+1];
+//        Deque<Integer> deque=new LinkedList<>();
+//
+//        for(int i=0;i<k;i++){
+//            while(!deque.isEmpty() && deque.peekLast()<nums[i]){
+//                deque.removeLast();
+//            }
+//            deque.addLast(nums[i]);
+//        }
+//        res[0]=deque.peek();
+//
+//        for(int i=k;i<n;i++){
+//            if(deque.peek()==nums[i-k]){
+//                deque.removeFirst();
+//            }
+//
+//            while (!deque.isEmpty() && deque.peekLast()<nums[i]){
+//                deque.removeLast();
+//            }
+//            deque.addLast(nums[i]);
+//            res[i-k+1]=deque.peek();
+//        }
+//        return res;
+//    }
 
 //    public int[] maxSlidingWindow(int[] nums, int k) {
 //
@@ -93,8 +146,8 @@ public class No239 {
 
 
 
-        int[] nums = new int[]{-7,-8,7,5,7,1,6,0};
-        int k = 4;
+        int[] nums = new int[]{1,3,1,2,0,5};
+        int k = 3;
 
         No239 no239 = new No239();
         int[] ints = no239.maxSlidingWindow(nums, k);

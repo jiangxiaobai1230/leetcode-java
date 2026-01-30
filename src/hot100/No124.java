@@ -8,6 +8,8 @@ import src.dp.TreeNode;
  */
 public class No124 {
     int ans=Integer.MIN_VALUE;
+
+
     public int maxPathSum(TreeNode root) {
         if(root==null)return 0;
         dfs(root);
@@ -15,13 +17,27 @@ public class No124 {
     }
     int dfs(TreeNode node){
         if(node==null)return 0;
-        int left=dfs(node.left),right=dfs(node.right),num=node.getVal();
+        int left=dfs(node.left),right=dfs(node.right),num=node.val;
         if(left>0)num+=left;
         if(right>0)num+=right;
         ans=Math.max(ans,num);
-        return Math.max(node.getVal(), Math.max(left,right)+node.getVal());
+        return Math.max(Math.max(left,right)+node.val,node.val);
 
     }
+//    public int maxPathSum(TreeNode root) {
+//        if(root==null)return 0;
+//        dfs(root);
+//        return ans;
+//    }
+//    int dfs(TreeNode node){
+//        if(node==null)return 0;
+//        int left=dfs(node.left),right=dfs(node.right),num=node.getVal();
+//        if(left>0)num+=left;
+//        if(right>0)num+=right;
+//        ans=Math.max(ans,num);
+//        return Math.max(node.getVal(), Math.max(left,right)+node.getVal());
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

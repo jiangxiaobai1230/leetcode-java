@@ -8,6 +8,7 @@ import java.util.List;
  * @date: 2024-05-07 10:19
  */
 public class No49 {
+
     private List<List<Integer>> res=new ArrayList<>();
     private List<Integer> path=new ArrayList<>();
     private List<Boolean> used=new ArrayList<>();
@@ -23,18 +24,47 @@ public class No49 {
     public void backtrack(int[] nums) {
         if(path.size()==nums.length){
             res.add(new ArrayList<>(path));
-            return;
         }
         for(int i=0;i<nums.length;i++){
-            if(used.get(i))continue;
-            used.set(i,true);
-            path.add(nums[i]);
-            backtrack(nums);
-            path.remove(path.size()-1);
-            used.set(i,false);
+            if(used.get(i)==false){
+                used.set(i,true);
+                path.add(nums[i]);
+                backtrack(nums);
+                path.remove(path.size()-1);
+                used.set(i,false);
+
+            }
         }
 
     }
+
+//    private List<List<Integer>> res=new ArrayList<>();
+//    private List<Integer> path=new ArrayList<>();
+//    private List<Boolean> used=new ArrayList<>();
+//
+//    public List<List<Integer>> permute(int[] nums) {
+//        for(int i=0;i<nums.length;i++){
+//            used.add(false);
+//        }
+//        backtrack(nums);
+//        return res;
+//
+//    }
+//    public void backtrack(int[] nums) {
+//        if(path.size()==nums.length){
+//            res.add(new ArrayList<>(path));
+//            return;
+//        }
+//        for(int i=0;i<nums.length;i++){
+//            if(used.get(i))continue;
+//            used.set(i,true);
+//            path.add(nums[i]);
+//            backtrack(nums);
+//            path.remove(path.size()-1);
+//            used.set(i,false);
+//        }
+//
+//    }
 
     public static void main(String[] args) {
 

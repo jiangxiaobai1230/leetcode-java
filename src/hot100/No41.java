@@ -7,17 +7,17 @@ package src.hot100;
 public class No41 {
     //https://leetcode.cn/problems/first-missing-positive/solutions/304743/que-shi-de-di-yi-ge-zheng-shu-by-leetcode-solution/?envType=study-plan-v2&envId=top-100-liked
 
+
+
     public int firstMissingPositive(int[] nums) {
         int len=nums.length;
         for(int i=0;i<len;i++){
             if(nums[i]<=0)nums[i]=len+1;
         }
         for(int i=0;i<len;i++){
-            if(nums[i]<=len){
-                int num=Math.abs(nums[i]);
-                if(num<=len) {
-                    nums[num - 1] = -Math.abs(nums[num - 1]);
-                }
+            int num=Math.abs(nums[i]);
+            if(num<=len){
+                nums[num-1]=-Math.abs(nums[num-1]);
             }
         }
         for(int i=0;i<len;i++){
@@ -25,6 +25,43 @@ public class No41 {
         }
         return len+1;
     }
+//
+//    public int firstMissingPositive(int[] nums) {
+//        int len=nums.length;
+//        for(int i=0;i<len;i++){
+//            if(nums[i]<=0)nums[i]=len+1;
+//        }
+//        for(int i=0;i<len;i++){
+//            if(nums[i]<=len){
+//                int num=Math.abs(nums[i]);
+//                if(num<=len) {
+//                    nums[num - 1] = -Math.abs(nums[num - 1]);
+//                }
+//            }
+//        }
+//        for(int i=0;i<len;i++){
+//            if(nums[i]>0)return i+1;
+//        }
+//        return len+1;
+//    }
+//    public int firstMissingPositive(int[] nums) {
+//        int len=nums.length;
+//        for(int i=0;i<len;i++){
+//            if(nums[i]<=0)nums[i]=len+1;
+//        }
+//        for(int i=0;i<len;i++){
+//            if(nums[i]<=len){
+//                int num=Math.abs(nums[i]);
+//                if(num<=len) {
+//                    nums[num - 1] = -Math.abs(nums[num - 1]);
+//                }
+//            }
+//        }
+//        for(int i=0;i<len;i++){
+//            if(nums[i]>0)return i+1;
+//        }
+//        return len+1;
+//    }
 
     public static void main(String[] args) {
         //示例 1：

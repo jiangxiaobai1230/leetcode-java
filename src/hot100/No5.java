@@ -7,33 +7,66 @@ package src.hot100;
 public class No5 {
     //https://leetcode.cn/problems/longest-palindromic-substring/solutions/2939834/san-chong-fang-fa-dp-zhong-xin-kuo-zhan-pcas3/?envType=study-plan-v2&envId=top-100-liked
 
+
     public String longestPalindrome(String s) {
         if(s.length()==1)return s;
         int n=s.length();
+        int[][] dp=new int[n][n];
+        char[] c=s.toCharArray();
         int l=0,r=0;
-        boolean[][] dp=new boolean[n][n];
         for(int i=0;i<n;i++){
-            dp[i][i]=true;
-            if(i<n-1&&s.charAt(i)==s.charAt(i+1)) {
-                dp[i][i + 1] = true;
-                l=i;
-                r=i+1;
+            dp[i][i]=1;
+        }
+        for(int i=0;i<n-1;i++){
+            if(c[i]==c[i+1]) {
+                dp[i][i+1] = 1;
+                l = i;
+                r = i+1;
             }
         }
         for(int i=n-3;i>=0;i--){
             for(int j=i+2;j<n;j++){
-                if(dp[i+1][j-1]&&s.charAt(i)==s.charAt(j)) {
-                    dp[i][j] = true;
+                if(c[i]==c[j]&&dp[i+1][j-1]==1) {
+                    dp[i][j] =1;
                     if(j-i>r-l){
                         l=i;
                         r=j;
                     }
-                }
+                }else dp[i][j]=0;
 
             }
+
         }
         return s.substring(l,r+1);
     }
+
+//    public String longestPalindrome(String s) {
+//        if(s.length()==1)return s;
+//        int n=s.length();
+//        int l=0,r=0;
+//        boolean[][] dp=new boolean[n][n];
+//        for(int i=0;i<n;i++){
+//            dp[i][i]=true;
+//            if(i<n-1&&s.charAt(i)==s.charAt(i+1)) {
+//                dp[i][i + 1] = true;
+//                l=i;
+//                r=i+1;
+//            }
+//        }
+//        for(int i=n-3;i>=0;i--){
+//            for(int j=i+2;j<n;j++){
+//                if(dp[i+1][j-1]&&s.charAt(i)==s.charAt(j)) {
+//                    dp[i][j] = true;
+//                    if(j-i>r-l){
+//                        l=i;
+//                        r=j;
+//                    }
+//                }
+//
+//            }
+//        }
+//        return s.substring(l,r+1);
+//    }
 
     public static void main(String[] args) {
         //示例 1：
@@ -46,8 +79,8 @@ public class No5 {
         //输入：s = "cbbd"
         //输出："bb"
         No5 no5 = new No5();
-        System.out.println(no5.longestPalindrome("ac"));
         System.out.println(no5.longestPalindrome("cbbd"));
+        System.out.println(no5.longestPalindrome("aaaa"));
 
     }
 }

@@ -9,6 +9,53 @@ import java.util.Map;
  */
 public class No4 {
 
+    public int lengthOfLongestSubstring(String s) {
+        int n=s.length();
+        int res=0;
+        Map<Character,Integer> count=new HashMap<>();
+        int left=0,right=0;
+        while (left<=right&&right<n){
+            char c=s.charAt(right);
+            count.put(c,count.getOrDefault(c,0)+1);
+            while (count.getOrDefault(c,0)>1){
+                count.put(s.charAt(left),count.get(s.charAt(left))-1);
+                left++;
+            }
+            right++;
+            res=Math.max(res,right-left);
+        }
+        return res;
+
+
+    }
+//    public int lengthOfLongestSubstring(String s) {
+//        int res=0,n=s.length();
+//        if(n<2)return n;
+//        Map<Character,Integer> map=new HashMap<>();
+//        int len=0;
+//        int left=0,right=0;
+//        while (left<=right&&right<n){
+//            char c=s.charAt(right);
+//            if(map.containsKey(c)){
+//                while (map.containsKey(c)){
+//                    map.remove(s.charAt(left));
+//                    left++;
+//                }
+//
+//            }
+//            len=right-left+1;
+//            if(len>res)res=len;
+//            map.put(c,right);
+//            right++;
+//
+//        }
+//        return res;
+//
+//
+//
+//
+//    }
+
     //暴力有一个例子超时
 //    public int lengthOfLongestSubstring(String s) {
 //        int res=1,len=s.length();
@@ -34,23 +81,23 @@ public class No4 {
 //        return res;
 //    }
 
-    public int lengthOfLongestSubstring(String s) {
-        int res=0,left=-1,len=s.length();
-        Map<Character, Integer> map = new HashMap<>();
-        if(len==0||len==1)return len;
-        for(int i=0;i<len;i++){
-            char c=s.charAt(i);
-            if(map.containsKey(c)&&map.get(c)<i){
-                left=Math.max(left,map.get(c));
-            }else {
-
-            }
-            map.put(c,i);
-            res=Math.max(res,i-left);
-
-        }
-        return res;
-    }
+//    public int lengthOfLongestSubstring(String s) {
+//        int res=0,left=-1,len=s.length();
+//        Map<Character, Integer> map = new HashMap<>();
+//        if(len==0||len==1)return len;
+//        for(int i=0;i<len;i++){
+//            char c=s.charAt(i);
+//            if(map.containsKey(c)&&map.get(c)<i){
+//                left=Math.max(left,map.get(c));
+//            }else {
+//
+//            }
+//            map.put(c,i);
+//            res=Math.max(res,i-left);
+//
+//        }
+//        return res;
+//    }
 
 
     public static void main(String[] args) {
@@ -70,7 +117,7 @@ public class No4 {
         //输出: 3
         //解释: 因为无重复字符的最长子串是 "wke"，所以其长度为 3。
         //     请注意，你的答案必须是 子串 的长度，"pwke" 是一个子序列，不是子串。
-        String s = "abcabcbb";
+        String s = "au";
         No4 no4 = new No4();
         System.out.println(no4.lengthOfLongestSubstring(s));
         System.out.println(no4.lengthOfLongestSubstring("bbbbb"));

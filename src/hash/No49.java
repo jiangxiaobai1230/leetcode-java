@@ -1,5 +1,7 @@
 package src.hash;
 
+import org.w3c.dom.ls.LSInput;
+
 import java.util.*;
 
 /**
@@ -8,23 +10,62 @@ import java.util.*;
  */
 public class No49 {
     public List<List<String>> groupAnagrams(String[] strs) {
-        Map<String,List<String>> res=new HashMap<>();
-        for(int i=0;i<strs.length;i++){
-            char[] s=strs[i].toCharArray();
-            Arrays.sort(s);
-            if(res.containsKey(new String(s))){
-                res.get(new String(s)).add(strs[i]);
-
-            }else {
-                List<String> list=new ArrayList<>();
-                list.add(strs[i]);
-                res.put(new String(s),list);
+        HashMap<String,List<String>> hashMap=new HashMap<>();
+        List<List<String>> res=new ArrayList<>();
+        for(String s:strs){
+            char[] c=s.toCharArray();
+            Arrays.sort(c);
+            String sortedS=String.valueOf(c);
+            if(!hashMap.containsKey(sortedS)){
+                hashMap.put(sortedS,new ArrayList<>());
             }
+            hashMap.get(sortedS).add(s);
+        }
+        for(Map.Entry<String,List<String>> candidate:hashMap.entrySet()){
+            res.add(candidate.getValue());
 
         }
-        return new ArrayList<>(res.values());
+        return res;
 
     }
+
+//    public List<List<String>> groupAnagrams(String[] strs) {
+//        HashMap<String,List<String>> hashMap=new HashMap<>();
+//        List<List<String>> res=new ArrayList<>();
+//        for(String str:strs){
+//            char[] s=str.toCharArray();
+//            Arrays.sort(s);
+//            String t=String.valueOf(s);
+//            if(!hashMap.containsKey(t)){
+//                hashMap.put(t,new ArrayList<>());
+//            }
+//            hashMap.get(t).add(str);
+//        }
+//        for(Map.Entry<String,List<String>> t:hashMap.entrySet()){
+//            res.add(hashMap.get(t.getKey()));
+//        }
+//        return res;
+//
+//
+//    }
+//    public List<List<String>> groupAnagrams(String[] strs) {
+//        Map<String,List<String>> res=new HashMap<>();
+//        for(int i=0;i<strs.length;i++){
+//            char[] s=strs[i].toCharArray();
+//            Arrays.sort(s);
+//            if(res.containsKey(new String(s))){
+//                res.get(new String(s)).add(strs[i]);
+//
+//            }else {
+//                List<String> list=new ArrayList<>();
+//                list.add(strs[i]);
+//                res.put(new String(s),list);
+//            }
+//
+//        }
+//        return new ArrayList<>(res.values());
+//
+//    }
 
     public static void main(String[] args) {
 

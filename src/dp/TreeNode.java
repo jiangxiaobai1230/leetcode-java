@@ -6,19 +6,11 @@ package src.dp;
  */
 public class TreeNode {
 
-    int val;
+    public int val;
     public TreeNode left;
     public TreeNode right;
 
-    public int getVal() {
-        return val;
-    }
 
-    public void setVal(int val) {
-        this.val = val;
-    }
-    public TreeNode() {
-    }
 
     public TreeNode(int val) {
         this.val = val;
@@ -28,5 +20,9 @@ public class TreeNode {
         this.val = val;
         this.left = left;
         this.right = right;
+    }
+
+    public int getVal() {
+        return val;
     }
 }

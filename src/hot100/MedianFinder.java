@@ -10,28 +10,51 @@ import java.util.Queue;
 
 //https://leetcode.cn/problems/find-median-from-data-stream/solutions/3015873/ru-he-zi-ran-yin-ru-da-xiao-dui-jian-ji-4v22k/?envType=study-plan-v2&envId=top-100-liked
 
+
 public class MedianFinder {
     private final PriorityQueue<Integer> left=new PriorityQueue<>((a,b)->b-a);
     private final PriorityQueue<Integer> right=new PriorityQueue<>();
+
     public MedianFinder() {
 
     }
 
     public void addNum(int num) {
-        if(left.size()==right.size()){
-            right.offer(num);
-            left.offer(right.poll());
+        if(left.size()==right.size()) {
+            left.add(num);
+            right.add(left.poll());
         }else {
-            left.offer(num);
-            right.offer(left.poll());
+            right.add(num);
+            left.add(right.poll());
         }
-
     }
 
     public double findMedian() {
-        if(left.size()>right.size())return left.peek();
-        return (left.peek()+right.peek())/2.0;
+        if(left.size()==right.size())return (double) (left.peek() + right.peek()) /2.0;
+        return right.peek();
+
     }
+//    private final PriorityQueue<Integer> left=new PriorityQueue<>((a,b)->b-a);
+//    private final PriorityQueue<Integer> right=new PriorityQueue<>();
+//    public MedianFinder() {
+//
+//    }
+//
+//    public void addNum(int num) {
+//        if(left.size()==right.size()){
+//            right.offer(num);
+//            left.offer(right.poll());
+//        }else {
+//            left.offer(num);
+//            right.offer(left.poll());
+//        }
+//
+//    }
+//
+//    public double findMedian() {
+//        if(left.size()>right.size())return left.peek();
+//        return (left.peek()+right.peek())/2.0;
+//    }
 
     public static void main(String[] args) {
         //示例 1：

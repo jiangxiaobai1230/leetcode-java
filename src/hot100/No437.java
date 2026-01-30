@@ -5,6 +5,7 @@ package src.hot100;
 import src.dp.TreeNode;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 
 /**
@@ -12,29 +13,49 @@ import java.util.Locale;
  * @date: 2025-01-20 23:17
  */
 public class No437 {
-    //https://leetcode.cn/problems/path-sum-iii/solutions/1021776/tong-ge-lai-shua-ti-la-qian-zhui-he-tu-j-trcq/?envType=study-plan-v2&envId=top-100-liked
-    //第一反应回溯！！！
+
+
     int res;
+    HashMap<Long,Integer> hashMap=new HashMap<>();
     public int pathSum(TreeNode root, int targetSum) {
         if(root==null)return 0;
-        HashMap<Long,Integer> map=new HashMap<>();
-        map.put(0L,1);
-        dfs(root,0L,map,targetSum);
+        hashMap.put(0L,1);
+        return dfs(root,0,targetSum);
+    }
+    public int dfs(TreeNode root, long curNum,int targetSum) {
+        if(root==null)return 0;
+        curNum+=root.val;
+        res+=hashMap.getOrDefault(curNum-targetSum,0);
+        hashMap.put(curNum,hashMap.getOrDefault(curNum,0)+1);
+        dfs(root.left,curNum,targetSum);
+        dfs(root.right,curNum,targetSum);
+        hashMap.put(curNum,hashMap.getOrDefault(curNum,0)-1);
         return res;
-
     }
-    void dfs(TreeNode node, Long curNum, HashMap<Long,Integer> map,int target){
-        if(node==null)return;
-        curNum+=node.getVal();
-        res+=map.getOrDefault(curNum-target,0);
 
-        map.put(curNum,map.getOrDefault(curNum,0)+1);
+        //https://leetcode.cn/problems/path-sum-iii/solutions/1021776/tong-ge-lai-shua-ti-la-qian-zhui-he-tu-j-trcq/?envType=study-plan-v2&envId=top-100-liked
+    //第一反应回溯！！！
+//    int res;
+//    public int pathSum(TreeNode root, int targetSum) {
+//        if(root==null)return 0;
+//        HashMap<Long,Integer> map=new HashMap<>();
+//        map.put(0L,1);
+//        dfs(root,0L,map,targetSum);
+//        return res;
+//
+//    }
+//    void dfs(TreeNode node, Long curNum, HashMap<Long,Integer> map,int target){
+//        if(node==null)return;
+//        curNum+=node.getVal();
+//        res+=map.getOrDefault(curNum-target,0);
+//
+//        map.put(curNum,map.getOrDefault(curNum,0)+1);
+//
+//        dfs(node.left,curNum,map,target);
+//        dfs(node.right,curNum,map,target);
+//        map.put(curNum,map.getOrDefault(curNum,0)-1);
 
-        dfs(node.left,curNum,map,target);
-        dfs(node.right,curNum,map,target);
-        map.put(curNum,map.getOrDefault(curNum,0)-1);
 
-    }
 
     public static void main(String[] args) {
         //输入：root = [10,5,-3,3,2,null,11,3,-2,null,1], targetSum = 8

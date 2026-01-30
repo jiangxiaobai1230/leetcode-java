@@ -10,27 +10,45 @@ import java.util.Stack;
  */
 public class No94 {
 
-    //迭代法-中序遍历,左中右，先遍历完左边的，再中间最后右边
+
+
+    static List<Integer> res;
+
     public static List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        Stack<TreeNode> stack=new Stack<>();
-        if(root==null)return res;
-        TreeNode cur=root;
-        while (cur!=null || !stack.isEmpty()){
-            if(cur!=null){
-                stack.push(cur);
-                cur=cur.left;
-            }else{
-                cur=stack.pop();
-                res.add(cur.val);
-                cur=cur.right;
-
-            }
-        }
-
+        res = new ArrayList<>();
+        traversal(root);
         return res;
 
     }
+    public static void traversal(TreeNode root) {
+        if(root==null)return;
+        traversal(root.left);
+        res.add(root.val);
+        traversal(root.right);
+    }
+
+
+    //迭代法-中序遍历,左中右，先遍历完左边的，再中间最后右边
+//    public static List<Integer> inorderTraversal(TreeNode root) {
+//        List<Integer> res = new ArrayList<>();
+//        Stack<TreeNode> stack=new Stack<>();
+//        if(root==null)return res;
+//        TreeNode cur=root;
+//        while (cur!=null || !stack.isEmpty()){
+//            if(cur!=null){
+//                stack.push(cur);
+//                cur=cur.left;
+//            }else{
+//                cur=stack.pop();
+//                res.add(cur.val);
+//                cur=cur.right;
+//
+//            }
+//        }
+//
+//        return res;
+//
+//    }
 
 //    public static List<Integer> inorderTraversal(TreeNode root) {
 //        List<Integer> res=new ArrayList<>();

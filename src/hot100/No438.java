@@ -1,5 +1,6 @@
 package src.hot100;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,33 +10,89 @@ import java.util.List;
  */
 public class No438 {
 
-
     //https://leetcode.cn/problems/find-all-anagrams-in-a-string/?envType=study-plan-v2&envId=top-100-liked
+
+
     public List<Integer> findAnagrams(String s, String p) {
         List<Integer> res=new LinkedList<>();
-        int lens=s.length(),lenp=p.length();
-        if(lens<lenp)return res;
-        int l=0,r=0;
-        int[] nums=new int[26];
-        for(int i=0;i<lenp;i++){
-            nums[p.charAt(i)-'a']++;
+        if(s.length()<p.length())return res;
+        char[] ss=s.toCharArray();
+        char[] pp=p.toCharArray();
+        Arrays.sort(pp);
+        p=String.valueOf(pp);
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<p.length()-1;i++){
+            sb.append(ss[i]);
         }
-        for(r=0;r<lens;r++){
-            char c=s.charAt(r);
-            nums[c-'a']--;
-            while (nums[c-'a']<0){
-                nums[s.charAt(l)-'a']++;
-                l++;
-            }
-            if(l==r-lenp+1){
-                res.add(l);
-            }
+        for(int i=p.length()-1;i<s.length();i++){
+           sb.append(ss[i]);
+           char[] t=String.valueOf(sb).toCharArray();
+           Arrays.sort(t);
+           String ts=String.valueOf(t);
+           if(ts.equals(p)){
+               res.add(i-p.length()+1);
+           }
+           sb.deleteCharAt(0);
         }
 
         return res;
 
-
     }
+
+//    public List<Integer> findAnagrams(String s, String p) {
+//        List<Integer> res=new LinkedList<>();
+//        int n=s.length(),len=p.length();
+//        if(n<len)return res;
+//        char[] ch=s.toCharArray();
+//        char[] pp=p.toCharArray();
+//        Arrays.sort(pp);
+//        p= String.valueOf(pp);
+//        StringBuffer sb=new StringBuffer();
+//        for(int i=0;i<len-1;i++){
+//            sb.append(ch[i]);
+//        }
+//        for(int i=len-1;i<n;i++){
+//            sb.append(ch[i]);
+//            String sss=sb.toString();
+//            char[] cc=sss.toCharArray();
+//            Arrays.sort(cc);
+//            sss=String.valueOf(cc);
+//            if(sss.equals(p)){
+//                res.add(i-len+1);
+//            }
+//            sb.deleteCharAt(0);
+//        }
+//        return res;
+//
+//    }
+
+
+//    //https://leetcode.cn/problems/find-all-anagrams-in-a-string/?envType=study-plan-v2&envId=top-100-liked
+//    public List<Integer> findAnagrams(String s, String p) {
+//        List<Integer> res=new LinkedList<>();
+//        int lens=s.length(),lenp=p.length();
+//        if(lens<lenp)return res;
+//        int l=0,r=0;
+//        int[] nums=new int[26];
+//        for(int i=0;i<lenp;i++){
+//            nums[p.charAt(i)-'a']++;
+//        }
+//        for(r=0;r<lens;r++){
+//            char c=s.charAt(r);
+//            nums[c-'a']--;
+//            while (nums[c-'a']<0){
+//                nums[s.charAt(l)-'a']++;
+//                l++;
+//            }
+//            if(l==r-lenp+1){
+//                res.add(l);
+//            }
+//        }
+//
+//        return res;
+//
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1:

@@ -10,51 +10,92 @@ import java.util.Queue;
 
 //https://leetcode.cn/problems/rotting-oranges/solutions/129831/li-qing-si-lu-wei-shi-yao-yong-bfsyi-ji-ru-he-xie-/comments/2126691
 public class No994 {
-    int freshOrangeCount=0;
-    Queue<int[]> queue=new LinkedList<>();
-    public int orangesRotting(int[][] grid) {
-        int m=grid.length,n=grid[0].length;
 
-        int min=0;
-        for(int i=0;i<m;i++){
-            for(int j=0;j<n;j++){
-                if(grid[i][j]==1)freshOrangeCount++;
-                else if (grid[i][j]==2) {
+    Queue<int[]> queue=new LinkedList<>();
+    int freshCount=0;
+    int min=0;
+    public int orangesRotting(int[][] grid) {
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]==2){
                     queue.add(new int[]{i,j});
-                }
+                }else if(grid[i][j]==1)freshCount++;
             }
         }
-        while (freshOrangeCount!=0&&!queue.isEmpty()){
+        while (freshCount!=0&&!queue.isEmpty()){
             min++;
-            int num=queue.size();
-            for(int k=0;k<num;k++) {
-                int i = queue.peek()[0];
-                int j = queue.peek()[1];
-                queue.poll();
-                dfs(grid, i - 1, j);
-                dfs(grid, i + 1, j);
-                dfs(grid, i, j - 1);
+            int size=queue.size();
+            for(int k=0;k<size;k++) {
+                int[] t = queue.poll();
+                int i = t[0], j = t[1];
                 dfs(grid, i, j + 1);
+                dfs(grid, i + 1, j);
+                dfs(grid, i - 1, j);
+                dfs(grid, i, j - 1);
             }
         }
-        return freshOrangeCount>0?-1:min;
+        return freshCount>0?-1:min;
 
     }
-    void dfs(int[][] grid,int i,int j){
-        if(!isArea(grid,i,j)){
-            return;
-        }
+    public void dfs(int[][] grid,int i,int j){
+        if(!isCover(grid,i,j))return;
         if(grid[i][j]!=1)return;
+        freshCount--;
         grid[i][j]=2;
-        freshOrangeCount--;
         queue.add(new int[]{i,j});
 
-
     }
-    boolean isArea(int[][] grid,int i,int j){
+
+    public boolean isCover(int[][] grid,int i,int j){
         return i>=0&&i<grid.length&&j>=0&&j<grid[0].length;
 
     }
+
+//    int freshOrangeCount=0;
+//    Queue<int[]> queue=new LinkedList<>();
+//    public int orangesRotting(int[][] grid) {
+//        int m=grid.length,n=grid[0].length;
+//
+//        int min=0;
+//        for(int i=0;i<m;i++){
+//            for(int j=0;j<n;j++){
+//                if(grid[i][j]==1)freshOrangeCount++;
+//                else if (grid[i][j]==2) {
+//                    queue.add(new int[]{i,j});
+//                }
+//            }
+//        }
+//        while (freshOrangeCount!=0&&!queue.isEmpty()){
+//            min++;
+//            int num=queue.size();
+//            for(int k=0;k<num;k++) {
+//                int i = queue.peek()[0];
+//                int j = queue.peek()[1];
+//                queue.poll();
+//                dfs(grid, i - 1, j);
+//                dfs(grid, i + 1, j);
+//                dfs(grid, i, j - 1);
+//                dfs(grid, i, j + 1);
+//            }
+//        }
+//        return freshOrangeCount>0?-1:min;
+//
+//    }
+//    void dfs(int[][] grid,int i,int j){
+//        if(!isArea(grid,i,j)){
+//            return;
+//        }
+//        if(grid[i][j]!=1)return;
+//        grid[i][j]=2;
+//        freshOrangeCount--;
+//        queue.add(new int[]{i,j});
+//
+//
+//    }
+//    boolean isArea(int[][] grid,int i,int j){
+//        return i>=0&&i<grid.length&&j>=0&&j<grid[0].length;
+//
+//    }
 
     public static void main(String[] args) {
         //输入：grid = [[2,1,1],[1,1,0],[0,1,1]]

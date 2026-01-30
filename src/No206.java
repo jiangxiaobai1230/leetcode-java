@@ -9,22 +9,52 @@ import src.LinkNode.ListNode;
 
 
 public class No206 {
-        public ListNode reverseList(ListNode head) {
-            ListNode pre,cur,tmp,next;
-            pre=null;
-            cur=head;
 
-            while(cur!=null){
-                tmp=cur.next;
-                cur.next=pre;
-                pre=cur;
-                cur=tmp;
-
-            }
-            return pre;
-
-
+    public ListNode reverseList(ListNode head) {
+        ListNode pre=null,cur=head,nxt=head;
+        while (cur!=null){
+            nxt=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=nxt;
         }
+        return pre;
+
+
+    }
+
+//    public ListNode reverseList(ListNode head) {
+//        ListNode pre,cur,tmp,next;
+//        pre=null;
+//        cur=head;
+//
+//        while(cur!=null){
+//            tmp=cur.next;
+//            cur.next=pre;
+//            pre=cur;
+//            cur=tmp;
+//
+//        }
+//        return pre;
+//
+//
+//    }
+//        public ListNode reverseList(ListNode head) {
+//            ListNode pre,cur,tmp,next;
+//            pre=null;
+//            cur=head;
+//
+//            while(cur!=null){
+//                tmp=cur.next;
+//                cur.next=pre;
+//                pre=cur;
+//                cur=tmp;
+//
+//            }
+//            return pre;
+//
+//
+//        }
 
     public static void main(String[] args) {
             //head = [1,2,3,4,5]

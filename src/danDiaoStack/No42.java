@@ -7,36 +7,74 @@ import java.util.Stack;
  * @date: 2024-10-12 19:39
  */
 public class No42 {
+
     public int trap(int[] height) {
-        int len=height.length;
-        int sum=0;
-        Stack<Integer> stack=new Stack<>();
-        stack.push(0);
-        int mid=0;
-        for(int i=1;i<len;i++){
-            if(!stack.isEmpty()&&height[stack.peek()]>height[i]){
-                stack.push(i);
-            } else if (height[stack.peek()]==height[i]) {
-                stack.pop();
-                stack.push(i);
-            }else {
-                while (!stack.isEmpty()&&height[stack.peek()]<height[i]){
-                    mid=stack.pop();
-                    if (!stack.isEmpty()) {
-                        int left=stack.peek();
-                        int h = Math.min(height[i], height[left]) - height[mid];
-                        int w = i - left - 1;
-                        sum += h * w;
-                    }
-                }
-                stack.push(i);
-
-            }
-
+        int n=height.length;
+        int[] left=new int[n];
+        int[] right=new int[n];
+        left[0]=height[0];
+        right[n-1]=height[n-1];
+        for(int i=1;i<n;i++){
+            left[i]=Math.max(height[i],left[i-1]);
         }
-        return sum;
+        for(int i=n-2;i>=0;i--){
+            right[i]=Math.max(right[i+1],height[i]);
+        }
+        int res=0;
+        for(int i=0;i<n;i++){
+            res+=Math.min(left[i],right[i])-height[i];
+        }
+        return res;
 
     }
+
+//    public int trap(int[] height) {
+//        int n=height.length;
+//        int[] pre=new int[n],suf=new int[n];
+//        pre[0]=height[0];
+//        suf[n-1]=height[n-1];
+//        for(int i=1;i<n;i++){
+//            pre[i]=Math.max(pre[i-1],height[i]);
+//        }
+//        for(int i=n-2;i>=0;i--){
+//            suf[i]=Math.max(suf[i+1],height[i]);
+//        }
+//        int res=0;
+//        for(int i=0;i<n;i++){
+//            res+=Math.min(pre[i],suf[i])-height[i];
+//        }
+//        return res;
+//    }
+//    public int trap(int[] height) {
+//        int len=height.length;
+//        int sum=0;
+//        Stack<Integer> stack=new Stack<>();
+//        stack.push(0);
+//        int mid=0;
+//        for(int i=1;i<len;i++){
+//            if(!stack.isEmpty()&&height[stack.peek()]>height[i]){
+//                stack.push(i);
+//            } else if (height[stack.peek()]==height[i]) {
+//                stack.pop();
+//                stack.push(i);
+//            }else {
+//                while (!stack.isEmpty()&&height[stack.peek()]<height[i]){
+//                    mid=stack.pop();
+//                    if (!stack.isEmpty()) {
+//                        int left=stack.peek();
+//                        int h = Math.min(height[i], height[left]) - height[mid];
+//                        int w = i - left - 1;
+//                        sum += h * w;
+//                    }
+//                }
+//                stack.push(i);
+//
+//            }
+//
+//        }
+//        return sum;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

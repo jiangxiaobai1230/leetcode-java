@@ -8,39 +8,61 @@ import src.LinkNode.ListNode;
  */
 public class No160 {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        int lenA=0,lenB=0;
-        ListNode curA=headA,curB=headB;
-        while (curA!=null){
-            lenA++;
-            curA=curA.next;
+        ListNode list1=headA,list2=headB;
+        while (list1!=list2){
+            list1=list1.next==null?headB:list1.next;
+            list2=list2.next==null?headA:list2.next;
         }
-        while (curB!=null){
-            lenB++;
-            curB=curB.next;
-        }
-        if(lenA>lenB){
-            int cnt=lenA-lenB;
-            while (cnt>0){
-                headA=headA.next;
-                cnt--;
-            }
-        }else {
-            int cnt=lenB-lenA;
-            while (cnt>0){
-                headB=headB.next;
-                cnt--;
-            }
-        }
-        while (headB!=null&&headA!=null){
-            if(headA==headB)return headA;
-            else {
-                headA=headA.next;
-                headB=headB.next;
-            }
-        }
-        return null;
+        return list1;
 
     }
+
+
+//    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//        ListNode list1=headA,list2=headB;
+//        while (list1!=list2){
+//            list1=list1!=null?list1.next:headB;
+//            list2=list2!=null?list2.next:headA;
+//
+//        }
+//        return list1;
+//
+//    }
+
+//    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+//        int lenA=0,lenB=0;
+//        ListNode curA=headA,curB=headB;
+//        while (curA!=null){
+//            lenA++;
+//            curA=curA.next;
+//        }
+//        while (curB!=null){
+//            lenB++;
+//            curB=curB.next;
+//        }
+//        if(lenA>lenB){
+//            int cnt=lenA-lenB;
+//            while (cnt>0){
+//                headA=headA.next;
+//                cnt--;
+//            }
+//        }else {
+//            int cnt=lenB-lenA;
+//            while (cnt>0){
+//                headB=headB.next;
+//                cnt--;
+//            }
+//        }
+//        while (headB!=null&&headA!=null){
+//            if(headA==headB)return headA;
+//            else {
+//                headA=headA.next;
+//                headB=headB.next;
+//            }
+//        }
+//        return null;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

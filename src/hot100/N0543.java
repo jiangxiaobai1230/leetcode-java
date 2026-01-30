@@ -29,15 +29,28 @@ public class N0543 {
         if(root==null)return 0;
         dfs(root);
         return ans;
-
     }
     int dfs(TreeNode node){
-       if(node==null)return 0;
-       int left=dfs(node.left)+1;
-       int right=dfs(node.right)+1;
-       ans=Math.max(ans,left+right-2);
-       return Math.max(left,right);
+        if(node==null)return 0;
+        int left=dfs(node.left);
+        int right=dfs(node.right);
+        ans=Math.max(left+right,ans);
+        return Math.max(left,right)+1;
     }
+
+//    public int diameterOfBinaryTree(TreeNode root) {
+//        if(root==null)return 0;
+//        dfs(root);
+//        return ans;
+//
+//    }
+//    int dfs(TreeNode node){
+//       if(node==null)return 0;
+//       int left=dfs(node.left)+1;
+//       int right=dfs(node.right)+1;
+//       ans=Math.max(ans,left+right-2);
+//       return Math.max(left,right);
+//    }
 
     public static void main(String[] args) {
         //输入：root = [1,2,3,4,5]

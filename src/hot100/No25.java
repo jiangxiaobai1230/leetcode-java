@@ -9,39 +9,82 @@ import src.LinkNode.ListNode;
 public class No25 {
     //https://leetcode.cn/problems/reverse-nodes-in-k-group/solutions/10416/tu-jie-kge-yi-zu-fan-zhuan-lian-biao-by-user7208t/?envType=study-plan-v2&envId=top-100-liked
 
+
     public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode head1=head,head2=head;
+        int len=0;
+        while (head2!=null){
+            head2=head2.next;
+            len++;
+        }
+
         ListNode dummy=new ListNode(0);
         dummy.next=head;
-        ListNode pre=dummy,start=dummy,end=dummy;
-
-        while (end.next!=null){
+        ListNode pre=dummy,nxt=null;
+        head2=dummy;
+        while (len-k>=0){
             for(int i=0;i<k;i++){
-                end=end.next;
-                if(end==null)break;
+                head2=head2.next;
             }
-            if(end==null)break;
-            ListNode next=end.next;
-            end.next=null;
-            start=pre.next;
-            pre.next=reverse(start);
-            start.next=next;
-            pre=start;
-            end=pre;
+            nxt=head2.next;
+            head2.next=null;
+            pre.next=reverse(head1);
+            head1.next=nxt;
+            pre=head1;
+            head1=head1.next;
+            head2=pre;
+            len=len-k;
+
         }
         return dummy.next;
 
     }
-    public ListNode reverse(ListNode begin){
-        ListNode last=null,cur=begin;
+    public ListNode reverse(ListNode node){
+        ListNode pre,cur,nxt;
+        pre=null;
+        cur=node;
         while (cur!=null){
-            ListNode t=cur.next;
-            cur.next=last;
-            last=cur;
-            cur=t;
-
+            nxt=cur.next;
+            cur.next=pre;
+            pre=cur;
+            cur=nxt;
         }
-        return last;
+        return pre;
+
     }
+//    public ListNode reverseKGroup(ListNode head, int k) {
+//        ListNode dummy=new ListNode(0);
+//        dummy.next=head;
+//        ListNode pre=dummy,start=dummy,end=dummy;
+//
+//        while (end.next!=null){
+//            for(int i=0;i<k;i++){
+//                end=end.next;
+//                if(end==null)break;
+//            }
+//            if(end==null)break;
+//            ListNode next=end.next;
+//            end.next=null;
+//            start=pre.next;
+//            pre.next=reverse(start);
+//            start.next=next;
+//            pre=start;
+//            end=pre;
+//        }
+//        return dummy.next;
+//
+//    }
+//    public ListNode reverse(ListNode begin){
+//        ListNode last=null,cur=begin;
+//        while (cur!=null){
+//            ListNode t=cur.next;
+//            cur.next=last;
+//            last=cur;
+//            cur=t;
+//
+//        }
+//        return last;
+//    }
 
     public static void main(String[] args) {
         //示例 1：

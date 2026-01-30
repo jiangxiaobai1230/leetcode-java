@@ -9,26 +9,45 @@ import java.util.List;
  */
 public class No763 {
 
+
     public List<Integer> partitionLabels(String s) {
-        int[] lastIndexList=new int[26];
+        int[] last=new int[26];
         for(int i=0;i<s.length();i++){
-            char c=s.charAt(i);
-            int charNum=c-'a';
-            lastIndexList[charNum]=i;
+            last[s.charAt(i)-'a']=i;
         }
-        int len=0;
         List<Integer> res=new ArrayList<>();
-        int index=-1;
+        int start=0,end=0;
         for(int i=0;i<s.length();i++){
-            index=Math.max(index,lastIndexList[s.charAt(i)-'a']);
-            if(index==i){
-                index=i+1;
-                res.add(i-len+1);
-                len=i+1;
+            end=Math.max(end,last[s.charAt(i)-'a']);
+            if(i==end){
+                res.add(end-start+1);
+                end=i+1;
+                start=i+1;
             }
         }
         return res;
+
     }
+//    public List<Integer> partitionLabels(String s) {
+//        int[] lastIndexList=new int[26];
+//        for(int i=0;i<s.length();i++){
+//            char c=s.charAt(i);
+//            int charNum=c-'a';
+//            lastIndexList[charNum]=i;
+//        }
+//        int len=0;
+//        List<Integer> res=new ArrayList<>();
+//        int index=-1;
+//        for(int i=0;i<s.length();i++){
+//            index=Math.max(index,lastIndexList[s.charAt(i)-'a']);
+//            if(index==i){
+//                index=i+1;
+//                res.add(i-len+1);
+//                len=i+1;
+//            }
+//        }
+//        return res;
+//    }
 
 
     public static void main(String[] args) {

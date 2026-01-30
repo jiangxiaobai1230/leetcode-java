@@ -2,6 +2,9 @@ package src.hot100;
 
 import src.LinkNode.ListNode;
 
+import java.util.List;
+import java.util.PriorityQueue;
+
 /**
  * @author: Yuan Yuqing
  * @date: 2025-01-17 23:48
@@ -10,34 +13,58 @@ public class No23 {
 
     //https://leetcode.cn/problems/merge-k-sorted-lists/solutions/2384517/javapython3cfen-zhi-fa-you-xian-dui-lie-b60ou/?envType=study-plan-v2&envId=top-100-liked
     public ListNode mergeKLists(ListNode[] lists) {
-        return divided(lists,0, lists.length);
 
-    }
-    ListNode divided(ListNode[] lists,int l,int r){
-        if(l>=r)return null;
-        if(l==r-1)return lists[l];
-        int mid=l+((r-l)>>1);
-        return merge(divided(lists,l,mid),divided(lists,mid,r));
+        int len=lists.length;
+        if(len==0)return null;
+        ListNode dummy=new ListNode(0),cur=dummy;
+        PriorityQueue<ListNode> queue=new PriorityQueue<>((a,b)->a.val-b.val);
+        for(int i=0;i<len;i++){
+            if(lists[i]==null) continue;
+            queue.offer(lists[i]);
 
-    }
-    ListNode merge(ListNode list1,ListNode list2){
-        if(list1==null)return list2;
-        if(list2==null)return list1;
-        ListNode dummy=new ListNode(0),res=dummy;
-        while (list1!=null&&list2!=null){
-            if(list1.val<= list2.val){
-                res.next=list1;
-                list1=list1.next;
-            }else {
-                res.next=list2;
-                list2=list2.next;
-            }
-            res=res.next;
         }
-        if(list1==null)res.next=list2;
-        else res.next=list1;
+        while (!queue.isEmpty()){
+            ListNode node=queue.poll();
+            if(node==null)break;
+            cur.next=node;
+            cur=cur.next;
+            if(node.next!=null)queue.add(node.next);
+
+        }
         return dummy.next;
+
     }
+
+//
+//    public ListNode mergeKLists(ListNode[] lists) {
+//        return divided(lists,0, lists.length);
+//
+//    }
+//    ListNode divided(ListNode[] lists,int l,int r){
+//        if(l>=r)return null;
+//        if(l==r-1)return lists[l];
+//        int mid=l+((r-l)>>1);
+//        return merge(divided(lists,l,mid),divided(lists,mid,r));
+//
+//    }
+//    ListNode merge(ListNode list1,ListNode list2){
+//        if(list1==null)return list2;
+//        if(list2==null)return list1;
+//        ListNode dummy=new ListNode(0),res=dummy;
+//        while (list1!=null&&list2!=null){
+//            if(list1.val<= list2.val){
+//                res.next=list1;
+//                list1=list1.next;
+//            }else {
+//                res.next=list2;
+//                list2=list2.next;
+//            }
+//            res=res.next;
+//        }
+//        if(list1==null)res.next=list2;
+//        else res.next=list1;
+//        return dummy.next;
+//    }
     public static void main(String[] args) {
         //示例 1：
         //

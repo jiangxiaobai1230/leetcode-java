@@ -7,38 +7,59 @@ package src.dp;
 public class No416 {
 
     public boolean canPartition(int[] nums) {
-
         int len=nums.length;
-        if(len<2)return false;
         int sum=0;
         for(int i=0;i<len;i++){
             sum+=nums[i];
         }
-        if(sum%2!=0)return false;
-        int target=sum/2;
-        int[][] dp=new int[len][target+1];
-        if(nums[0]<=target){
-            for(int i=nums[0];i<=target;i++) {
-                dp[0][i] = nums[0];
+        if(sum%2==1)return false;
+        sum=sum/2;
+        boolean[][] dp=new boolean[len+1][sum+1];
+        dp[0][0]=true;
+        for(int i=1;i<=len;i++){
+            int num=nums[i-1];
+            for(int j=0;j<=sum;j++){
+                if(j>=num){
+                    dp[i][j]=dp[i-1][j-num]||dp[i-1][j];
+                }else dp[i][j]=dp[i-1][j];
             }
         }
-        for(int i=1;i<len;i++){
-            for(int j=0;j<=target;j++){
-                if(j>nums[i]){
-                    dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-nums[i]]+nums[i]);
-                }else
-                    dp[i][j]=dp[i-1][j];
-
-                if(j==nums[i]){
-                    dp[i][j]=dp[i-1][j-nums[i]]+nums[i];
-                }
-
-            }
-        }
-        return dp[len-1][target]==target;
-
-
+        return dp[len][sum];
     }
+
+//    public boolean canPartition(int[] nums) {
+//
+//        int len=nums.length;
+//        if(len<2)return false;
+//        int sum=0;
+//        for(int i=0;i<len;i++){
+//            sum+=nums[i];
+//        }
+//        if(sum%2!=0)return false;
+//        int target=sum/2;
+//        int[][] dp=new int[len][target+1];
+//        if(nums[0]<=target){
+//            for(int i=nums[0];i<=target;i++) {
+//                dp[0][i] = nums[0];
+//            }
+//        }
+//        for(int i=1;i<len;i++){
+//            for(int j=0;j<=target;j++){
+//                if(j>nums[i]){
+//                    dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-nums[i]]+nums[i]);
+//                }else
+//                    dp[i][j]=dp[i-1][j];
+//
+//                if(j==nums[i]){
+//                    dp[i][j]=dp[i-1][j-nums[i]]+nums[i];
+//                }
+//
+//            }
+//        }
+//        return dp[len-1][target]==target;
+//
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

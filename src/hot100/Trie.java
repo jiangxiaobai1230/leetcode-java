@@ -15,7 +15,7 @@ class TrieNode{
 
 }
 public class Trie {
-    private TrieNode root;
+    TrieNode root;
 
     public Trie() {
         root=new TrieNode();
@@ -24,44 +24,93 @@ public class Trie {
     public void insert(String word) {
         TrieNode cur=root;
         for(char c:word.toCharArray()){
-            c-='a';
-            if(cur.children[c]==null) {
-                cur.children[c] = new TrieNode();
+            if(cur.children[c-'a']==null) {
+                cur.children[c - 'a'] = new TrieNode();
             }
-            cur=cur.children[c];
+            cur=cur.children[c - 'a'];
+
         }
         cur.isEnd=true;
-
 
     }
 
     public boolean search(String word) {
-        int res=find(word);
-        if(res==2)return true;
-        return false;
+        TrieNode cur=root;
+        for(char c:word.toCharArray()){
+            if(cur.children[c-'a']==null)return false;
+            cur=cur.children[c-'a'];
+        }
+        return cur.isEnd;
 
     }
 
     public boolean startsWith(String prefix) {
-        int res=find(prefix);
-        if(res!=0)return true;
-        return false;
-
-    }
-    public int find(String prefix) {
         TrieNode cur=root;
         for(char c:prefix.toCharArray()){
-            c-='a';
-            if(cur.children[c]==null)return 0;
-            cur=cur.children[c];
+            if(cur.children[c-'a']==null)return false;
+            cur=cur.children[c-'a'];
         }
-        if(cur.isEnd) {
-            return 2;
-        } else {
-            return 1;
-        }
+        return true;
 
     }
+
+
+
+
+//class TrieNode{
+//
+//    boolean isEnd;
+//    TrieNode[] children=new TrieNode[26];
+//
+//}
+//public class Trie {
+//    private TrieNode root;
+//
+//    public Trie() {
+//        root=new TrieNode();
+//    }
+//
+//    public void insert(String word) {
+//        TrieNode cur=root;
+//        for(char c:word.toCharArray()){
+//            c-='a';
+//            if(cur.children[c]==null) {
+//                cur.children[c] = new TrieNode();
+//            }
+//            cur=cur.children[c];
+//        }
+//        cur.isEnd=true;
+//
+//
+//    }
+//
+//    public boolean search(String word) {
+//        int res=find(word);
+//        if(res==2)return true;
+//        return false;
+//
+//    }
+//
+//    public boolean startsWith(String prefix) {
+//        int res=find(prefix);
+//        if(res!=0)return true;
+//        return false;
+//
+//    }
+//    public int find(String prefix) {
+//        TrieNode cur=root;
+//        for(char c:prefix.toCharArray()){
+//            c-='a';
+//            if(cur.children[c]==null)return 0;
+//            cur=cur.children[c];
+//        }
+//        if(cur.isEnd) {
+//            return 2;
+//        } else {
+//            return 1;
+//        }
+//
+//    }
 
     public static void main(String[] args) {
         //示例：
@@ -88,6 +137,7 @@ public class Trie {
         trie.startsWith("app"); // 返回 True
         trie.insert("app");
         trie.search("app");     // 返回 True
+        trie.search("app");
 
 
 

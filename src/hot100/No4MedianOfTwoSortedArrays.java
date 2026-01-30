@@ -10,8 +10,6 @@ import java.util.Arrays;
 //https://leetcode.cn/problems/median-of-two-sorted-arrays/solutions/2950686/tu-jie-xun-xu-jian-jin-cong-shuang-zhi-z-p2gd/?envType=study-plan-v2&envId=top-100-liked
 public class No4MedianOfTwoSortedArrays {
 
-
-
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int len1=nums1.length,len2=nums2.length;
         if(len1==0&&len2==0)return 0;
@@ -24,7 +22,6 @@ public class No4MedianOfTwoSortedArrays {
             else return nums1[len1/2];
         }
         if(len1>len2) return findMedianSortedArrays(nums2, nums1);
-
         int[] a=new int[len1+2];
         int[] b=new int[len2+2];
         a[0]=Integer.MIN_VALUE;
@@ -37,23 +34,66 @@ public class No4MedianOfTwoSortedArrays {
         for(int i=0;i<len2;i++){
             b[i+1]=nums2[i];
         }
-        int left=0,right=len1+1;
-        //开区间
-        int totalLeft=(len1+len2+1)/2;
+
+        int left=0,right=len1+1,totalLeft=(len1+len2+1)/2;
         while (left+1<right){
             int i=(left+right)/2;
             int j=totalLeft-i;
-            if(a[i]>b[j+1]){
-                right=i;
-            }else left=i;
+            if(a[i]<b[j+1]){
+                left=i;
+            }else right=i;
+
         }
-        int i=left;
+        int i=(left+right)/2;
         int j=totalLeft-i;
         if((len1+len2)%2==0)return (Math.max(a[i],b[j])+Math.min(a[i+1],b[j+1]))/2.0;
-        else return Math.max(a[i],b[j]);
+        return Math.max(a[i],b[j]);
 
 
     }
+
+//    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+//        int len1=nums1.length,len2=nums2.length;
+//        if(len1==0&&len2==0)return 0;
+//        else if(len1==0){
+//            if(len2%2==0)return (nums2[len2/2]+nums2[len2/2-1])/2.0;
+//            else return nums2[len2/2];
+//        }
+//        else if(len2==0) {
+//            if(len1%2==0)return (nums1[len1/2]+nums1[len1/2-1])/2.0;
+//            else return nums1[len1/2];
+//        }
+//        if(len1>len2) return findMedianSortedArrays(nums2, nums1);
+//
+//        int[] a=new int[len1+2];
+//        int[] b=new int[len2+2];
+//        a[0]=Integer.MIN_VALUE;
+//        b[0]=Integer.MIN_VALUE;
+//        a[len1+1]=Integer.MAX_VALUE;
+//        b[len2+1]=Integer.MAX_VALUE;
+//        for(int i=0;i<len1;i++){
+//            a[i+1]=nums1[i];
+//        }
+//        for(int i=0;i<len2;i++){
+//            b[i+1]=nums2[i];
+//        }
+//        int left=0,right=len1+1;
+//        //开区间
+//        int totalLeft=(len1+len2+1)/2;
+//        while (left+1<right){
+//            int i=(left+right)/2;
+//            int j=totalLeft-i;
+//            if(a[i]>b[j+1]){
+//                right=i;
+//            }else left=i;
+//        }
+//        int i=left;
+//        int j=totalLeft-i;
+//        if((len1+len2)%2==0)return (Math.max(a[i],b[j])+Math.min(a[i+1],b[j+1]))/2.0;
+//        else return Math.max(a[i],b[j]);
+//
+//
+//    }
     public static void main(String[] args) {
 
         //示例 1：

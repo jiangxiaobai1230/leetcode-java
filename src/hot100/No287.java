@@ -8,21 +8,39 @@ public class No287 {
     //https://leetcode.cn/problems/find-the-duplicate-number/solutions/1169969/shu-ju-jie-gou-he-suan-fa-er-fen-fa-cha-8ybnw/?envType=study-plan-v2&envId=top-100-liked
 //https://leetcode.cn/problems/find-the-duplicate-number/solutions/1195510/kuai-man-zhi-zhen-287-xun-zhao-zhong-fu-la52t/?envType=study-plan-v2&envId=top-100-liked
 
+
     public int findDuplicate(int[] nums) {
         int len=nums.length;
-        int left=1,right=len-1;
-        while (left<right){
-            int mid=(left+right)/2;
-            int count=0;
-            for(int num:nums){
-                if(num<=mid)count++;
-            }
-            if(count>mid)right=mid;
-            else left=mid+1;
+        int slow=0,fast=0;
+        slow=nums[slow];
+        fast=nums[nums[fast]];
+        while (slow!=fast){
+            slow=nums[slow];
+            fast=nums[nums[fast]];
         }
-        return left;
+        fast=0;
+        while (slow!=fast){
+            slow=nums[slow];
+            fast=nums[fast];
+        }
+        return slow;
 
     }
+//    public int findDuplicate(int[] nums) {
+//        int len=nums.length;
+//        int left=1,right=len-1;
+//        while (left<right){
+//            int mid=(left+right)/2;
+//            int count=0;
+//            for(int num:nums){
+//                if(num<=mid)count++;
+//            }
+//            if(count>mid)right=mid;
+//            else left=mid+1;
+//        }
+//        return left;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

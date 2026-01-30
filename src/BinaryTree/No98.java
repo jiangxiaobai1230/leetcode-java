@@ -5,20 +5,45 @@ package src.BinaryTree;
  * @date: 2024-04-18 10:15
  */
 public class No98 {
+    public long pre=Long.MIN_VALUE;
 
     public boolean isValidBST(TreeNode root) {
         if(root==null)return true;
-        return isValidBST(root,null,null);
-
+        if(!isValidBST(root.left))return false;
+        if(pre>=root.val)return false;
+        pre=root.val;
+        return isValidBST(root.right);
     }
-    public boolean isValidBST(TreeNode root,TreeNode min,TreeNode max) {
-        if(root==null)return true;
-        if(min!=null&&min.val>=root.val)return false;
-        if(max!=null&&max.val<=root.val)return false;
-        return isValidBST(root.left,min,root)&&isValidBST(root.right,root,max);
 
 
-    }
+//    public boolean isValidBST(TreeNode root) {
+//        if(root==null)return true;
+//        return isValidBST(root,null,null);
+//
+//    }
+//    public boolean isValidBST(TreeNode root,TreeNode min,TreeNode max) {
+//        if(root==null)return true;
+//        if(min!=null&&min.val>=root.val)return false;
+//        if(max!=null&&max.val<=root.val)return false;
+//        return isValidBST(root.left,min,root)&&isValidBST(root.right,root,max);
+//
+//
+//    }
+
+//
+//    public boolean isValidBST(TreeNode root) {
+//        if(root==null)return true;
+//        return isValidBST(root,null,null);
+//
+//    }
+//    public boolean isValidBST(TreeNode root,TreeNode min,TreeNode max) {
+//        if(root==null)return true;
+//        if(min!=null&&min.val>=root.val)return false;
+//        if(max!=null&&max.val<=root.val)return false;
+//        return isValidBST(root.left,min,root)&&isValidBST(root.right,root,max);
+//
+//
+//    }
 
 
     public static void main(String[] args) {

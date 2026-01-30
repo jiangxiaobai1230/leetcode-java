@@ -5,23 +5,38 @@ package src.BinaryTree;
  * @date: 2024-04-09 11:06
  */
 public class No226 {
+//    public TreeNode invertTree(TreeNode root) {
+//
+//        getInversedTree(root);
+//
+//        return root;
+//    }
+//    public void getInversedTree(TreeNode node){
+//        if(node==null)return;
+//        else{
+//            TreeNode t=node.left;
+//            node.left=node.right;
+//            node.right=t;
+//            getInversedTree(node.left);
+//            getInversedTree(node.right);
+//        }
+//
+//    }
+
+
     public TreeNode invertTree(TreeNode root) {
-
-        getInversedTree(root);
-
+        invert(root);
         return root;
     }
-    public void getInversedTree(TreeNode node){
-        if(node==null)return;
-        else{
-            TreeNode t=node.left;
-            node.left=node.right;
-            node.right=t;
-            getInversedTree(node.left);
-            getInversedTree(node.right);
-        }
-
+    public void invert(TreeNode root) {
+        if(root==null)return;
+        TreeNode cur=root.left;
+        root.left=root.right;
+        root.right=cur;
+        invert(root.left);
+        invert(root.right);
     }
+
 
     public static void main(String[] args) {
 

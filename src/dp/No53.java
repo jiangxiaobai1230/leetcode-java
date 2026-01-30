@@ -1,24 +1,47 @@
 package src.dp;
 
+import src.Main;
+
 /**
  * @author: Yuan Yuqing
  * @date: 2024-09-13 15:33
  */
 public class No53 {
+
     public int maxSubArray(int[] nums) {
-        int len=nums.length;
-        int[] dp=new int[len];
-        //这里的dp[i]指的是以nums[i]结尾的范围内的最大连续和
-        dp[0]=nums[0];
-        int res=dp[0];
-        for(int i=1;i<len;i++){
-            dp[i]=Math.max(dp[i-1]+nums[i],nums[i]);
-            res=Math.max(res,dp[i]);
-
-        }
-        return res;
-
+      int pre=0,res=Integer.MIN_VALUE;
+      for(int i=0;i<nums.length;i++){
+          pre= Math.max(nums[i],pre+nums[i]);
+          res=Math.max(res,pre);
+      }
+      return res;
     }
+
+//    public int maxSubArray(int[] nums) {
+//       int pre=0;
+//       int sum=Integer.MIN_VALUE;
+//       for(int num:nums){
+//           pre= Math.max(num,pre+num);
+//           sum=Math.max(pre,sum);
+//
+//       }
+//       return sum;
+//
+//    }
+//    public int maxSubArray(int[] nums) {
+//        int len=nums.length;
+//        int[] dp=new int[len];
+//        //这里的dp[i]指的是以nums[i]结尾的范围内的最大连续和
+//        dp[0]=nums[0];
+//        int res=dp[0];
+//        for(int i=1;i<len;i++){
+//            dp[i]=Math.max(dp[i-1]+nums[i],nums[i]);
+//            res=Math.max(res,dp[i]);
+//
+//        }
+//        return res;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

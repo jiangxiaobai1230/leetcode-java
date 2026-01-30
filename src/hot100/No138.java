@@ -1,7 +1,10 @@
 package src.hot100;
 
+import src.LinkNode.ListNode;
+
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * @author: Yuan Yuqing
@@ -24,16 +27,17 @@ public class No138 {
     //https://leetcode.cn/problems/copy-list-with-random-pointer/solutions/2361362/138-fu-zhi-dai-sui-ji-zhi-zhen-de-lian-b-6jeo/?envType=study-plan-v2&envId=top-100-liked
     //靠了，题目都没看懂
 
+
     public Node copyRandomList(Node head) {
         if(head==null)return null;
-        Node cur = head;
-        HashMap<Node ,Node> hashMap=new HashMap<>();
+        Node cur=head;
+        HashMap<Node,Node> hashMap=new HashMap<>();
         while (cur!=null){
             Node node=new Node(cur.val);
             hashMap.put(cur,node);
             cur=cur.next;
         }
-        cur = head;
+        cur=head;
         while (cur!=null){
             Node node=hashMap.get(cur);
             node.next=hashMap.get(cur.next);
@@ -41,7 +45,28 @@ public class No138 {
             cur=cur.next;
         }
         return hashMap.get(head);
+
+
     }
+
+//    public Node copyRandomList(Node head) {
+//        if(head==null)return null;
+//        Node cur = head;
+//        HashMap<Node ,Node> hashMap=new HashMap<>();
+//        while (cur!=null){
+//            Node node=new Node(cur.val);
+//            hashMap.put(cur,node);
+//            cur=cur.next;
+//        }
+//        cur = head;
+//        while (cur!=null){
+//            Node node=hashMap.get(cur);
+//            node.next=hashMap.get(cur.next);
+//            node.random=hashMap.get(cur.random);
+//            cur=cur.next;
+//        }
+//        return hashMap.get(head);
+//    }
 
     public static void main(String[] args) {
         //输入：head = [[7,null],[13,0],[11,4],[10,2],[1,0]]

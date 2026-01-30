@@ -5,6 +5,28 @@ package src.LinkNode;
  * @date: 2024-03-15 18:47
  */
 public class No24 {
+
+
+
+
+    public ListNode swapPairs(ListNode head) {
+        if(head==null||head.next==null){
+            return head;
+        }
+        ListNode dummy=new ListNode(0);
+        ListNode cur=dummy;
+        dummy.next=head;
+        while (cur!=null&&cur.next!=null&&cur.next.next!=null){
+
+            ListNode pre=cur.next,second=cur.next.next,nxt=cur.next.next.next;
+            cur.next.next.next=cur.next;
+            pre.next=nxt;
+            cur.next=second;
+            cur=pre;
+
+        }
+        return dummy.next;
+    }
     //这里是没有按照题目要求来的，因为说了不能修改内部的值，重新写一个新的
 //    public ListNode swapPairs(ListNode head) {
 //        if(head==null||head.next==null){
@@ -28,40 +50,40 @@ public class No24 {
 //    }
 
 
-    public ListNode swapPairs(ListNode head) {
-        if(head==null||head.next==null){
-            return head;
-        }
-        ListNode newHead=new ListNode();
-        ListNode newHead2=new ListNode();
-        newHead.next=head;
-        newHead2=newHead;
-        ListNode pre=newHead.next,next=pre.next;
-        while(pre!=null&&pre.next!=null){
-            newHead.next=next;
-            pre.next=next.next;
-            next.next=pre;
-
-
-
-            newHead=pre;
-            pre=newHead.next;
-            if(pre!=null){
-                next=pre.next;
-            }else{
-                return newHead2.next;
-
-            }
-
-
-        }
-
-
-
-
-        return newHead2.next;
-
-    }
+//    public ListNode swapPairs(ListNode head) {
+//        if(head==null||head.next==null){
+//            return head;
+//        }
+//        ListNode newHead=new ListNode();
+//        ListNode newHead2=new ListNode();
+//        newHead.next=head;
+//        newHead2=newHead;
+//        ListNode pre=newHead.next,next=pre.next;
+//        while(pre!=null&&pre.next!=null){
+//            newHead.next=next;
+//            pre.next=next.next;
+//            next.next=pre;
+//
+//
+//
+//            newHead=pre;
+//            pre=newHead.next;
+//            if(pre!=null){
+//                next=pre.next;
+//            }else{
+//                return newHead2.next;
+//
+//            }
+//
+//
+//        }
+//
+//
+//
+//
+//        return newHead2.next;
+//
+//    }
 
     public static void main(String[] args) {
 

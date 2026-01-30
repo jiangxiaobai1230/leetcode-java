@@ -5,26 +5,43 @@ package src.LinkNode;
  * @date: 2024-03-15 20:01
  */
 public class No19 {
+
+
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
-        ListNode fast,low,dummy = new ListNode(0);
+        ListNode dummy=new ListNode(0),slow=dummy,fast=dummy;
         dummy.next=head;
-        fast=dummy;
-        low=dummy;
-        for(int i=0;i<n+1;i++){
+        for(int i=0;i<n;i++){
             fast=fast.next;
         }
-        while(fast!=null){
+        while (fast.next!=null){
+            slow=slow.next;
             fast=fast.next;
-            low=low.next;
         }
-        ListNode deleteNode=low.next;
-        ListNode tmpNode=deleteNode.next;
-        low.next=tmpNode;
-
+        slow.next=slow.next.next;
         return dummy.next;
 
     }
+//    public ListNode removeNthFromEnd(ListNode head, int n) {
+//
+//        ListNode fast,low,dummy = new ListNode(0);
+//        dummy.next=head;
+//        fast=dummy;
+//        low=dummy;
+//        for(int i=0;i<n+1;i++){
+//            fast=fast.next;
+//        }
+//        while(fast!=null){
+//            fast=fast.next;
+//            low=low.next;
+//        }
+//        ListNode deleteNode=low.next;
+//        ListNode tmpNode=deleteNode.next;
+//        low.next=tmpNode;
+//
+//        return dummy.next;
+//
+//    }
 
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);

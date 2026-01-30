@@ -5,15 +5,28 @@ package src.BinaryTree;
  * @date: 2024-04-08 22:07
  */
 public class No104 {
+
+
     public int maxDepth(TreeNode root) {
-        int max=0;
+        int maxDepth=0;
         if(root==null)return 0;
-        else{
+        else {
             int left=maxDepth(root.left);
             int right=maxDepth(root.right);
-            return Math.max(left,right)+1;
+            maxDepth=Math.max(maxDepth,Math.max(left,right)+1);
         }
+        return maxDepth;
+
     }
+//    public int maxDepth(TreeNode root) {
+//        int max=0;
+//        if(root==null)return 0;
+//        else{
+//            int left=maxDepth(root.left);
+//            int right=maxDepth(root.right);
+//            return Math.max(left,right)+1;
+//        }
+//    }
 
     public static void main(String[] args) {
 

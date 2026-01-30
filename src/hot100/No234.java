@@ -2,6 +2,8 @@ package src.hot100;
 
 import src.LinkNode.ListNode;
 
+import java.util.List;
+
 /**
  * @author: Yuan Yuqing
  * @date: 2025-01-12 22:33
@@ -9,7 +11,7 @@ import src.LinkNode.ListNode;
 public class No234 {
     public boolean isPalindrome(ListNode head) {
         if(head==null||head.next==null)return true;
-        ListNode slow=head,fast=head,cur=head,pre=null;
+        ListNode slow=head,fast=head,pre=null,cur=head;
         while (fast!=null&&fast.next!=null){
             slow=slow.next;
             fast=fast.next.next;
@@ -18,28 +20,53 @@ public class No234 {
             pre=cur;
             cur=slow;
 
-
-
         }
-        if(fast==null){
-            while (pre!=null&&cur!=null) {
-                if (pre.val != cur.val) return false;
-                pre=pre.next;
-                cur=cur.next;
-            }
-        }else {
+        if(fast!=null){
             cur=cur.next;
-            while (pre!=null&&cur!=null) {
-                if (pre.val != cur.val) return false;
+        }
+        while (pre!=null&&cur!=null){
+            if(pre.val!=cur.val)return false;
+            else {
                 pre=pre.next;
                 cur=cur.next;
             }
-
         }
-
 
         return true;
     }
+//    public boolean isPalindrome(ListNode head) {
+//        if(head==null||head.next==null)return true;
+//        ListNode slow=head,fast=head,cur=head,pre=null;
+//        while (fast!=null&&fast.next!=null){
+//            slow=slow.next;
+//            fast=fast.next.next;
+//
+//            cur.next=pre;
+//            pre=cur;
+//            cur=slow;
+//
+//
+//
+//        }
+//        if(fast==null){
+//            while (pre!=null&&cur!=null) {
+//                if (pre.val != cur.val) return false;
+//                pre=pre.next;
+//                cur=cur.next;
+//            }
+//        }else {
+//            cur=cur.next;
+//            while (pre!=null&&cur!=null) {
+//                if (pre.val != cur.val) return false;
+//                pre=pre.next;
+//                cur=cur.next;
+//            }
+//
+//        }
+//
+//
+//        return true;
+//    }
 
 
     public static void main(String[] args) {

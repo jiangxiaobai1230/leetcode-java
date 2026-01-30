@@ -10,37 +10,71 @@ import java.util.*;
 //https://leetcode.cn/problems/kth-largest-element-in-an-array/solutions/2361969/215-shu-zu-zhong-de-di-k-ge-zui-da-yuan-d786p/?envType=study-plan-v2&envId=top-100-liked
 
 public class No215 {
-    public int findKthLargest(int[] nums, int k) {
-        List<Integer> num=new ArrayList<>();
-        for(int i:nums){
-            num.add(i);
-        }
 
-        return quickSelect(num,k);
+    public int findKthLargest(int[] nums, int k) {
+        List<Integer> arr=new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            arr.add(nums[i]);
+        }
+        return quickSelect(arr,k);
+
 
     }
-    public int quickSelect(List<Integer> nums, int k){
-        List<Integer> big=new ArrayList<>();
-        List<Integer> small=new ArrayList<>();
-        List<Integer> equal=new ArrayList<>();
+    public int quickSelect(List<Integer> nums, int k) {
         Random random=new Random();
         int pivot=nums.get(random.nextInt(nums.size()));
+        List<Integer> big=new ArrayList<>();
+        List<Integer> equal=new ArrayList<>();
+        List<Integer> small=new ArrayList<>();
+
         for(int num:nums){
             if(num>pivot)big.add(num);
             else if (num<pivot) {
                 small.add(num);
-            }
-            else equal.add(num);
+
+            }else equal.add(num);
+
         }
-        if(big.size()>=k){
-            return quickSelect(big,k);
-        } else if (big.size()+equal.size()<k) {
+        if(big.size()>=k)return quickSelect(big,k);
+        else if (nums.size()-small.size()<k) {
             return quickSelect(small,k-big.size()-equal.size());
 
         }
         return pivot;
 
+
     }
+//    public int findKthLargest(int[] nums, int k) {
+//        List<Integer> num=new ArrayList<>();
+//        for(int i:nums){
+//            num.add(i);
+//        }
+//
+//        return quickSelect(num,k);
+//
+//    }
+//    public int quickSelect(List<Integer> nums, int k){
+//        List<Integer> big=new ArrayList<>();
+//        List<Integer> small=new ArrayList<>();
+//        List<Integer> equal=new ArrayList<>();
+//        Random random=new Random();
+//        int pivot=nums.get(random.nextInt(nums.size()));
+//        for(int num:nums){
+//            if(num>pivot)big.add(num);
+//            else if (num<pivot) {
+//                small.add(num);
+//            }
+//            else equal.add(num);
+//        }
+//        if(big.size()>=k){
+//            return quickSelect(big,k);
+//        } else if (big.size()+equal.size()<k) {
+//            return quickSelect(small,k-big.size()-equal.size());
+//
+//        }
+//        return pivot;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1:

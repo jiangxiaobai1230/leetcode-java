@@ -7,30 +7,78 @@ import src.LinkNode.ListNode;
  * @date: 2025-01-13 22:49
  */
 public class No2 {
+
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         if(l1==null&&l2==null)return null;
         if(l1==null)return l2;
         if(l2==null)return l1;
         ListNode node=new ListNode(0),cur=node;
         int carry=0;
-        while (l1!=null||l2!=null||carry!=0){
-            if(l1!=null){
-                carry=carry+ l1.val;
-                l1=l1.next;
-            }
-            if(l2!=null){
-                carry=carry+ l2.val;
-                l2=l2.next;
-            }
-            ListNode num=new ListNode(carry%10);
-            cur.next=num;
-            cur=cur.next;
-            carry=carry/10;
-
+        while (l1!=null&&l2!=null){
+            int sum=carry+l1.val+l2.val;
+            carry=sum/10;
+            sum=sum%10;
+            l1=l1.next;
+            l2=l2.next;
+            ListNode newNode=new ListNode(sum);
+            cur.next=newNode;
+            cur=newNode;
+        }
+        while (l2!=null){
+            int sum=carry+l2.val;
+            carry=sum/10;
+            sum=sum%10;
+            ListNode newNode=new ListNode(sum);
+            cur.next=newNode;
+            cur=newNode;
+            l2=l2.next;
 
         }
+        while(l1!=null){
+            int sum=carry+l1.val;
+            carry=sum/10;
+            sum=sum%10;
+            ListNode newNode=new ListNode(sum);
+            cur.next=newNode;
+            cur=newNode;
+            l1=l1.next;
+
+        }
+        if(carry==1){
+            ListNode newNode=new ListNode(1);
+            cur.next=newNode;
+            cur=newNode;
+        }
+
         return node.next;
+
     }
+
+//    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//        if(l1==null&&l2==null)return null;
+//        if(l1==null)return l2;
+//        if(l2==null)return l1;
+//        ListNode node=new ListNode(0),cur=node;
+//        int carry=0;
+//        while (l1!=null||l2!=null||carry!=0){
+//            if(l1!=null){
+//                carry=carry+ l1.val;
+//                l1=l1.next;
+//            }
+//            if(l2!=null){
+//                carry=carry+ l2.val;
+//                l2=l2.next;
+//            }
+//            ListNode num=new ListNode(carry%10);
+//            cur.next=num;
+//            cur=cur.next;
+//            carry=carry/10;
+//
+//
+//        }
+//        return node.next;
+//    }
 
     public static void main(String[] args) {
         //输入：l1 = [2,4,3], l2 = [5,6,4]

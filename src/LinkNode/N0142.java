@@ -6,40 +6,62 @@ package src.LinkNode;
  */
 public class N0142 {
     //这个题目太难了，只能理解加上背了。。。。感觉做题还得有个草稿本才行
+
     public ListNode detectCycle(ListNode head) {
         if(head==null||head.next==null){
             return null;
-
         }
-
         ListNode fast=head, low=head;
-
-        while(fast!=null&&low!=null){
-            if(fast.next!=null){
-                fast=fast.next.next;
-                low=low.next;
-            }else{
-                return null;
-            }
-
-            if(fast==null||low==null){
-                return null;
-            }
-            if(fast==low){
-                break;
-            }
-
-        }
-        fast=head;
-        while(fast!=low){
-            fast=fast.next;
+        while(fast!=null&&fast.next!=null) {
             low=low.next;
+            fast=fast.next.next;
+            if(fast==low){
+                fast=head;
+                while (low!=fast){
+                    low=low.next;
+                    fast=fast.next;
+
+                }
+                return low;
+            }
         }
-        return low;
-
-
-
+        return null;
     }
+
+//    public ListNode detectCycle(ListNode head) {
+//        if(head==null||head.next==null){
+//            return null;
+//
+//        }
+//
+//        ListNode fast=head, low=head;
+//
+//        while(fast!=null&&low!=null){
+//            if(fast.next!=null){
+//                fast=fast.next.next;
+//                low=low.next;
+//            }else{
+//                return null;
+//            }
+//
+//            if(fast==null||low==null){
+//                return null;
+//            }
+//            if(fast==low){
+//                break;
+//            }
+//
+//        }
+//        fast=head;
+//        while(fast!=low){
+//            fast=fast.next;
+//            low=low.next;
+//        }
+//        return low;
+//
+//
+//
+//    }
 
     public static void main(String[] args) {
          //输入：head = [3,2,0,-4], pos = 1

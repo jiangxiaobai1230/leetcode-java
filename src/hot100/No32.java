@@ -8,30 +8,53 @@ public class No32 {
     //https://leetcode.cn/problems/longest-valid-parentheses/solutions/314827/shou-hua-tu-jie-zhan-de-xiang-xi-si-lu-by-hyj8/?envType=study-plan-v2&envId=top-100-liked
 
     //dp[i]是以s[i]结尾的最大字串长度
+
     public int longestValidParentheses(String s) {
         if(s.length()==0||s.length()==1)return 0;
         int res=0;
-        int[] dp=new int[s.length()];
-        for(int i=1;i<s.length();i++){
-            if(s.charAt(i)=='('){
-                dp[i]=0;
-            }else {
-                if(s.charAt(i-1)=='('){
-                    if(i>=2)dp[i]=dp[i-2]+2;
-                    else dp[i]=2;
+        int n=s.length();
+        int[] dp=new int[n+1];
+        for(int i=2;i<=n;i++){
+            if(s.charAt(i-1)=='(')dp[i]=0;
+            else {
+                if(s.charAt(i-2)=='('){
+                    dp[i]=dp[i-2]+2;
                 }else {
-                    if(i-dp[i-1]-1>=0&&s.charAt(i-dp[i-1]-1)=='('){
-                        if(i-dp[i-1]-2>=0){
-                            dp[i]=dp[i-1]+dp[i-dp[i-1]-2]+2;
-                        }else dp[i]=dp[i-1]+2;
-
-                    }else dp[i]=0;
+                    if(i-2-dp[i-1]>=0&&s.charAt(i-2-dp[i-1])=='(') {
+                        dp[i] = dp[i - 1] + dp[i - 2 - dp[i - 1]] + 2;
+                    }
+                    else dp[i]=0;
                 }
             }
             res=Math.max(res,dp[i]);
         }
+
         return res;
     }
+//    public int longestValidParentheses(String s) {
+//        if(s.length()==0||s.length()==1)return 0;
+//        int res=0;
+//        int[] dp=new int[s.length()];
+//        for(int i=1;i<s.length();i++){
+//            if(s.charAt(i)=='('){
+//                dp[i]=0;
+//            }else {
+//                if(s.charAt(i-1)=='('){
+//                    if(i>=2)dp[i]=dp[i-2]+2;
+//                    else dp[i]=2;
+//                }else {
+//                    if(i-dp[i-1]-1>=0&&s.charAt(i-dp[i-1]-1)=='('){
+//                        if(i-dp[i-1]-2>=0){
+//                            dp[i]=dp[i-1]+dp[i-dp[i-1]-2]+2;
+//                        }else dp[i]=dp[i-1]+2;
+//
+//                    }else dp[i]=0;
+//                }
+//            }
+//            res=Math.max(res,dp[i]);
+//        }
+//        return res;
+//    }
 
     public static void main(String[] args) {
         //示例 1：

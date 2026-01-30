@@ -8,28 +8,48 @@ package src.hot100;
 ///https://leetcode.cn/problems/sort-colors/solutions/676745/zui-jian-ji-de-shuang-zhi-zhen-jie-fa-yi-gtfz/?envType=study-plan-v2&envId=top-100-liked
     //https://leetcode.cn/problems/sort-colors/solutions/1868577/by-ac_oier-7lwk/?envType=study-plan-v2&envId=top-100-liked
 public class No75 {
+
     public void sortColors(int[] nums) {
-        int n=nums.length;
-        if(n<2)return;
-        int l=0,r=n-1,i=0;
-        while (i<=r){
-            if(nums[i]==0){
-                int temp=nums[l];
-                nums[l]=nums[i];
-                nums[i]=temp;
-                l++;
-                i++;
-            } else if (nums[i]==1) {
-                i++;
-            }else {
-                int temp=nums[r];
-                nums[r]=nums[i];
-                nums[i]=temp;
-                r--;
-//                i++;
+        int len=nums.length;
+        int p0=0,p1=0;
+        for(int i=0;i<len;i++){
+            int num=nums[i];
+            nums[i]=2;
+            if(num<=1){
+                nums[p1]=1;
+                p1++;
             }
+            if(num==0){
+                nums[p0]=0;
+                p0++;
+
+            }
+
         }
+
     }
+//    public void sortColors(int[] nums) {
+//        int n=nums.length;
+//        if(n<2)return;
+//        int l=0,r=n-1,i=0;
+//        while (i<=r){
+//            if(nums[i]==0){
+//                int temp=nums[l];
+//                nums[l]=nums[i];
+//                nums[i]=temp;
+//                l++;
+//                i++;
+//            } else if (nums[i]==1) {
+//                i++;
+//            }else {
+//                int temp=nums[r];
+//                nums[r]=nums[i];
+//                nums[i]=temp;
+//                r--;
+////                i++;
+//            }
+//        }
+//    }
 
     public static void main(String[] args) {
         //示例 1：

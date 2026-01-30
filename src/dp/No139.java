@@ -1,5 +1,6 @@
 package src.dp;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -9,23 +10,37 @@ import java.util.List;
 public class No139 {
 
     public boolean wordBreak(String s, List<String> wordDict) {
-        int len=wordDict.size();
-        boolean[] dp = new boolean[s.length() + 1];
+        boolean[] dp=new boolean[s.length()+1];
+        Arrays.fill(dp,false);
         dp[0]=true;
-        for(int i=1;i<=s.length();i++){
-            for(int j=0;j<len;j++){
-                String word=wordDict.get(j);
-                if(i>=word.length()&&dp[i-word.length()]&&s.substring(i-word.length(),i).equals(word)){
-                    dp[i]=true;
-                    break;
+        for(int j=0;j<s.length();j++){
+            for(int i=0;i<=j;i++){
+                if(dp[i]&&wordDict.contains(s.substring(i,j+1))){
+                    dp[j+1]=true;
                 }
-
-
             }
         }
         return dp[s.length()];
-
     }
+
+//    public boolean wordBreak(String s, List<String> wordDict) {
+//        int len=wordDict.size();
+//        boolean[] dp = new boolean[s.length() + 1];
+//        dp[0]=true;
+//        for(int i=1;i<=s.length();i++){
+//            for(int j=0;j<len;j++){
+//                String word=wordDict.get(j);
+//                if(i>=word.length()&&dp[i-word.length()]&&s.substring(i-word.length(),i).equals(word)){
+//                    dp[i]=true;
+//                    break;
+//                }
+//
+//
+//            }
+//        }
+//        return dp[s.length()];
+//
+//    }
 
     public static void main(String[] args) {
 

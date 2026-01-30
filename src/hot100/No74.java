@@ -9,24 +9,52 @@ public class No74 {
     //哈哈靠自己做出来了！！！
     //https://leetcode.cn/problems/search-a-2d-matrix/solutions/2783931/liang-chong-fang-fa-er-fen-cha-zhao-pai-39d74/?envType=study-plan-v2&envId=top-100-liked
     //这个做法更加合适
-
-
     public boolean searchMatrix(int[][] matrix, int target) {
-        int m =matrix.length,n = matrix[0].length;
-        int left=0,right=m*n-1;
-        while (left<=right){
-            int mid = (left+right)/2;
-            int num=matrix[mid/n][mid%n];
-            if(num==target)return true;
+        int m=matrix.length,n=matrix[0].length;
+        int i=0,j=n-1;
+        while (i<m&&j>=0){
+            int num=matrix[i][j];
+            if(num<target)i++;
             else if (num>target) {
-                right=mid-1;
-            }
-            else left=mid+1;
+                j--;
+            }else return true;
         }
-
         return false;
 
     }
+
+
+//    public boolean searchMatrix(int[][] matrix, int target) {
+//        int m =matrix.length,n = matrix[0].length;
+//        int i=0,j=n-1;
+//        while (i<m&&j>=0){
+//            int num=matrix[i][j];
+//            if(num<target)i++;
+//            else if (num>target) {
+//                j--;
+//            }else return true;
+//        }
+//
+//        return false;
+//
+//    }
+
+//    public boolean searchMatrix(int[][] matrix, int target) {
+//        int m =matrix.length,n = matrix[0].length;
+//        int left=0,right=m*n-1;
+//        while (left<=right){
+//            int mid = (left+right)/2;
+//            int num=matrix[mid/n][mid%n];
+//            if(num==target)return true;
+//            else if (num>target) {
+//                right=mid-1;
+//            }
+//            else left=mid+1;
+//        }
+//
+//        return false;
+//
+//    }
 
 //    public boolean searchMatrix(int[][] matrix, int target) {
 //        int m =matrix.length,n = matrix[0].length;

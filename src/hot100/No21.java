@@ -7,34 +7,73 @@ import src.LinkNode.ListNode;
  * @date: 2025-01-13 22:22
  */
 public class No21 {
+
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        if(list1==null&&list2==null)return null;
         if(list1==null)return list2;
         if(list2==null)return list1;
-        ListNode node=new ListNode(0),cur=node;
-        while (list1 != null && list2 != null) {
-            if(list1.val<=list2.val){
-                cur.next=list1;
-                list1=list1.next;
-                cur=cur.next;
-            }else {
-                cur.next=list2;
-                list2=list2.next;
-                cur=cur.next;
-            }
-
+        ListNode dummy=new ListNode(0);
+        ListNode cur=dummy;
+        while (list1!=null&&list2!=null){
+          if(list1.val<=list2.val){
+              cur.next=list1;
+              list1=list1.next;
+              cur=cur.next;
+          }else {
+              cur.next=list2;
+              list2=list2.next;
+              cur=cur.next;
+          }
         }
-        if(list1!=null){
-            cur.next=list1;
-        }
-        if(list2!=null){
-            cur.next=list2;
-        }
-
-        return node.next;
+        cur.next=list1==null?list2:list1;
 
 
+        return dummy.next;
     }
+
+//    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+//        ListNode dummy=new ListNode(0),cur=dummy;
+//        while (list1!=null&&list2!=null){
+//            if(list1.val<=list2.val){
+//                cur.next=list1;
+//                list1=list1.next;
+//                cur=cur.next;
+//            }else {
+//                cur.next=list2;
+//                list2=list2.next;
+//                cur=cur.next;
+//            }
+//        }
+//        cur.next=list1==null?list2:list1;
+//        return dummy.next;
+//    }
+//    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+//        if(list1==null&&list2==null)return null;
+//        if(list1==null)return list2;
+//        if(list2==null)return list1;
+//        ListNode node=new ListNode(0),cur=node;
+//        while (list1 != null && list2 != null) {
+//            if(list1.val<=list2.val){
+//                cur.next=list1;
+//                list1=list1.next;
+//                cur=cur.next;
+//            }else {
+//                cur.next=list2;
+//                list2=list2.next;
+//                cur=cur.next;
+//            }
+//
+//        }
+//        if(list1!=null){
+//            cur.next=list1;
+//        }
+//        if(list2!=null){
+//            cur.next=list2;
+//        }
+//
+//        return node.next;
+//
+//
+//    }
 
     public static void main(String[] args) {
         //输入：l1 = [1,2,4], l2 = [1,3,4]

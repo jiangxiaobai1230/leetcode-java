@@ -6,19 +6,46 @@ package src.BinaryTree;
  */
 public class No235 {
 
+
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        return traversal(root,p,q);
+        if(root==null)return root;
+        if(root==p||root==q)return root;
+        TreeNode left=lowestCommonAncestor(root.left,p,q);
+        TreeNode right=lowestCommonAncestor(root.right,p,q);
+        if(left!=null&&right!=null)return root;
+        if(left!=null)return left;
+        return right;
 
     }
 
-    public TreeNode traversal(TreeNode root,TreeNode p,TreeNode q){
-        if(root==null||root== q||root== p)return root;
-        if(root.val>p.val&&root.val> q.val)return traversal(root.left,p,q);
-        if(root.val<p.val&&root.val< q.val)return traversal(root.right,p,q);
-        TreeNode left=traversal(root.left,p,q);
-        TreeNode right=traversal(root.right,p,q);
-        return root;
-    }
+
+
+//    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+//        if(root==null)return root;
+//        if(root==p||root==q)return root;
+//        TreeNode left=lowestCommonAncestor(root.left,p,q);
+//        TreeNode right=lowestCommonAncestor(root.right,p,q);
+//        if(left!=null&&right!=null)return root;
+//        else if (left!=null) {
+//            return left;
+//
+//        }else return right;
+//    }
+
+
+//    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+//        return traversal(root,p,q);
+//
+//    }
+//
+//    public TreeNode traversal(TreeNode root,TreeNode p,TreeNode q){
+//        if(root==null||root== q||root== p)return root;
+//        if(root.val>p.val&&root.val> q.val)return traversal(root.left,p,q);
+//        if(root.val<p.val&&root.val< q.val)return traversal(root.right,p,q);
+//        TreeNode left=traversal(root.left,p,q);
+//        TreeNode right=traversal(root.right,p,q);
+//        return root;
+//    }
 
     public static void main(String[] args) {
 

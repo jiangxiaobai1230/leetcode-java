@@ -10,6 +10,7 @@ public class No148 {
 
     //https://leetcode.cn/problems/sort-list/solutions/13728/sort-list-gui-bing-pai-xu-lian-biao-by-jyd/?envType=study-plan-v2&envId=top-100-liked
 
+
     public ListNode sortList(ListNode head) {
         if(head==null||head.next==null){
             return head;
@@ -23,23 +24,52 @@ public class No148 {
         slow.next=null;
         ListNode left=sortList(head);
         ListNode right=sortList(rightHead);
-        ListNode dummy=new ListNode(0),res=dummy;
+        ListNode dummy=new ListNode(0),cur=dummy;
         while (left!=null&&right!=null){
             if(left.val<=right.val){
-                res.next=left;
+                cur.next=left;
                 left=left.next;
-                res=res.next;
             }else {
-                res.next=right;
+                cur.next=right;
                 right=right.next;
-                res=res.next;
             }
+            cur=cur.next;
         }
-        if(left!=null)res.next=left;
-        else res.next=right;
+        cur.next=left==null?right:left;
+
         return dummy.next;
 
     }
+//    public ListNode sortList(ListNode head) {
+//        if(head==null||head.next==null){
+//            return head;
+//        }
+//        ListNode slow=head,fast=head.next;
+//        while (fast!=null&&fast.next!=null){
+//            slow=slow.next;
+//            fast=fast.next.next;
+//        }
+//        ListNode rightHead=slow.next;
+//        slow.next=null;
+//        ListNode left=sortList(head);
+//        ListNode right=sortList(rightHead);
+//        ListNode dummy=new ListNode(0),res=dummy;
+//        while (left!=null&&right!=null){
+//            if(left.val<=right.val){
+//                res.next=left;
+//                left=left.next;
+//                res=res.next;
+//            }else {
+//                res.next=right;
+//                right=right.next;
+//                res=res.next;
+//            }
+//        }
+//        if(left!=null)res.next=left;
+//        else res.next=right;
+//        return dummy.next;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

@@ -22,27 +22,62 @@ public class No17 {
             "wxyz"  //9
     };
     private List<String> res=new ArrayList<>();
-    private StringBuffer sb=new StringBuffer();
+    private char[] path;
+
     public List<String> letterCombinations(String digits) {
-        if(Objects.equals(digits, ""))return res;
-        backtracking(digits,0);
+        path=new char[digits.length()];
+        dfs(digits,0);
         return res;
 
     }
-    public void backtracking(String digits,int index){
-        if(sb.length()==digits.length()){
-            res.add(String.valueOf(sb));
+    public void dfs(String digits,int index){
+        if(index==digits.length()){
+            res.add(new String(path));
             return;
+        }
+        char[] c=letterMap[digits.charAt(index)-'0'].toCharArray();
+        for(int i=0;i<c.length;i++){
+            path[index]=c[i];
+            dfs(digits,index+1);
+        }
 
-        }
-        int c=digits.charAt(index)-'0';
-        String s=letterMap[c];
-        for(int i=0;i<s.length();i++){
-            sb.append(s.charAt(i));
-            backtracking(digits,index+1);
-            sb.deleteCharAt(sb.length()-1);
-        }
     }
+
+
+//    private String[] letterMap = {
+//            "",    //0
+//            "",     //1
+//            "abc",  //2
+//            "def",  //3
+//            "ghi",  //4
+//            "jkl",  //5
+//            "mno",  //6
+//            "pqrs", //7
+//            "tuv",  //8
+//            "wxyz"  //9
+//    };
+//    private List<String> res=new ArrayList<>();
+//    private StringBuffer sb=new StringBuffer();
+//    public List<String> letterCombinations(String digits) {
+//        if(Objects.equals(digits, ""))return res;
+//        backtracking(digits,0);
+//        return res;
+//
+//    }
+//    public void backtracking(String digits,int index){
+//        if(sb.length()==digits.length()){
+//            res.add(String.valueOf(sb));
+//            return;
+//
+//        }
+//        int c=digits.charAt(index)-'0';
+//        String s=letterMap[c];
+//        for(int i=0;i<s.length();i++){
+//            sb.append(s.charAt(i));
+//            backtracking(digits,index+1);
+//            sb.deleteCharAt(sb.length()-1);
+//        }
+//    }
 
     public static void main(String[] args) {
 

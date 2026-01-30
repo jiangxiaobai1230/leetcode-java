@@ -6,21 +6,36 @@ package src.tanxin;
  */
 public class No45 {
 
+
     public int jump(int[] nums) {
         int step=0;
-        int end=0;
         int maxCoverage=0;
+        int end=0;
         for(int i=0;i<nums.length-1;i++){
             maxCoverage=Math.max(maxCoverage,nums[i]+i);
-            if(i==end){
+            if(end==i){
                 end=maxCoverage;
                 step++;
             }
-
         }
         return step;
-
     }
+
+//    public int jump(int[] nums) {
+//        int step=0;
+//        int end=0;
+//        int maxCoverage=0;
+//        for(int i=0;i<nums.length-1;i++){
+//            maxCoverage=Math.max(maxCoverage,nums[i]+i);
+//            if(i==end){
+//                end=maxCoverage;
+//                step++;
+//            }
+//
+//        }
+//        return step;
+//
+//    }
 
     public static void main(String[] args) {
 

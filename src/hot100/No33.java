@@ -9,54 +9,76 @@ public class No33 {
 
 
     public int search(int[] nums, int target) {
-        if(nums.length==1) {
-            return target==nums[0]?0:-1;
-        }
-        int left=0,right=nums.length-2,mid=0;
+        int n=nums.length;
+        int last=nums[n-1];
+        int left=0,right=n-1;
         while (left<=right){
-            mid=(left+right)/2;
+            int mid=(left+right)/2;
             int num=nums[mid];
-            if(nums[nums.length-1]>num){
-                right=mid-1;
-            }else{
-                left=mid+1;
-
-            }
-        }
-        int index=left;
-        if(target<=nums[nums.length-1]){
-            left=index;
-            right=nums.length-1;
-            while (left<=right){
-                mid=(left+right)/2;
-                int num=nums[mid];
-                if(target==num)return mid;
-                if(target>num){
-                    left=mid+1;
-                }else{
+            if(num<target){
+                if(num<last&&target>last){
                     right=mid-1;
-                }
-            }
-            return -1;
-        }
-        else {
-            left=0;
-            right=index-1;
-            while (left<=right){
-                mid=(left+right)/2;
-                int num=nums[mid];
-                if(target==num)return mid;
-                if(target>num){
+                }else {
                     left=mid+1;
-                }else{
-                    right=mid-1;
                 }
-            }
-            return -1;
-
+            }else if(num>target){
+                if(num>last&&target<=last){
+                    left=mid+1;
+                }else right=mid-1;
+            }else return mid;
         }
-
+        return -1;
     }
+
+//    public int search(int[] nums, int target) {
+//        if(nums.length==1) {
+//            return target==nums[0]?0:-1;
+//        }
+//        int left=0,right=nums.length-2,mid=0;
+//        while (left<=right){
+//            mid=(left+right)/2;
+//            int num=nums[mid];
+//            if(nums[nums.length-1]>num){
+//                right=mid-1;
+//            }else{
+//                left=mid+1;
+//
+//            }
+//        }
+//        int index=left;
+//        if(target<=nums[nums.length-1]){
+//            left=index;
+//            right=nums.length-1;
+//            while (left<=right){
+//                mid=(left+right)/2;
+//                int num=nums[mid];
+//                if(target==num)return mid;
+//                if(target>num){
+//                    left=mid+1;
+//                }else{
+//                    right=mid-1;
+//                }
+//            }
+//            return -1;
+//        }
+//        else {
+//            left=0;
+//            right=index-1;
+//            while (left<=right){
+//                mid=(left+right)/2;
+//                int num=nums[mid];
+//                if(target==num)return mid;
+//                if(target>num){
+//                    left=mid+1;
+//                }else{
+//                    right=mid-1;
+//                }
+//            }
+//            return -1;
+//
+//        }
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：
@@ -76,8 +98,8 @@ public class No33 {
         System.out.println(no33.search(nums, 0));
         System.out.println(no33.search(nums, 3));
 
-        nums=new int[]{1};
+        nums=new int[]{3,1};
 
-        System.out.println(no33.search(nums, 0));
+        System.out.println(no33.search(nums, 1));
     }
 }

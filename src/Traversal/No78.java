@@ -8,32 +8,50 @@ import java.util.List;
  * @date: 2024-04-29 22:48
  */
 public class No78 {
+
     private List<List<Integer>> res=new ArrayList<>();
     private List<Integer> path=new ArrayList<>();
 
     public List<List<Integer>> subsets(int[] nums) {
         res.add(new ArrayList<>());
-        if(nums.length==0){
-            return res;
-        }
-        backtracking(nums,0);
+        backtracing(0,nums);
         return res;
     }
-    public void backtracking(int[] nums,int index){
-//        if(index>=nums.length){
-//            res.add(new ArrayList<>(path));
-//            return;
-//        }
+    public void backtracing(int index,int[] nums){
         for(int i=index;i<nums.length;i++){
             path.add(nums[i]);
             res.add(new ArrayList<>(path));
-            backtracking(nums,i+1);
+            backtracing(i+1,nums);
             path.remove(path.size()-1);
-
         }
-        return;
-
     }
+
+//    private List<List<Integer>> res=new ArrayList<>();
+//    private List<Integer> path=new ArrayList<>();
+//
+//    public List<List<Integer>> subsets(int[] nums) {
+//        res.add(new ArrayList<>());
+//        if(nums.length==0){
+//            return res;
+//        }
+//        backtracking(nums,0);
+//        return res;
+//    }
+//    public void backtracking(int[] nums,int index){
+////        if(index>=nums.length){
+////            res.add(new ArrayList<>(path));
+////            return;
+////        }
+//        for(int i=index;i<nums.length;i++){
+//            path.add(nums[i]);
+//            res.add(new ArrayList<>(path));
+//            backtracking(nums,i+1);
+//            path.remove(path.size()-1);
+//
+//        }
+//        return;
+//
+//    }
 
     public static void main(String[] args) {
 

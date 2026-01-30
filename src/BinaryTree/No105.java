@@ -7,29 +7,48 @@ import java.util.HashMap;
  * @date: 2024-04-16 10:46
  */
 public class No105 {
-    private HashMap<Integer,Integer> hm=new HashMap<>();
-    private int[] pre;
+
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        for (int i=0;i<inorder.length;i++){
-            hm.put(inorder[i],i);
+        return build(preorder,0, preorder.length-1,inorder,0,inorder.length-1);
+
+    }
+    public TreeNode build(int[] preorder, int l,int r,int[] inorder,int m,int n) {
+        if(l>r||m>n)return null;
+        int num=preorder[l];
+        TreeNode node=new TreeNode(num);
+        int index;
+        for(index=m;index<=n;index++){
+            if(inorder[index]==num)break;
         }
-        pre=preorder;
-        return build(0,pre.length-1,0,inorder.length-1);
+        node.left=build(preorder,l+1,l+index-m,inorder,m,index-1);
+        node.right=build(preorder,l+index-m+1,r,inorder,index+1,n);
 
-    }
-    public TreeNode  build(int preStart,int preEnd,int inStart,int inEnd){
-        if(preStart>preEnd||inStart>inEnd)return null;
-        int root=pre[preStart];
-        TreeNode node=new TreeNode(root);
-        int inIndex=hm.get(root);
-
-        //
-        node.left=build(preStart+1,preStart+inIndex-inStart,inStart,inIndex-1);
-        node.right=build(preStart+inIndex-inStart+1,preEnd,inIndex+1,inEnd);
         return node;
-
-
     }
+
+//    private HashMap<Integer,Integer> hm=new HashMap<>();
+//    private int[] pre;
+//    public TreeNode buildTree(int[] preorder, int[] inorder) {
+//        for (int i=0;i<inorder.length;i++){
+//            hm.put(inorder[i],i);
+//        }
+//        pre=preorder;
+//        return build(0,pre.length-1,0,inorder.length-1);
+//
+//    }
+//    public TreeNode  build(int preStart,int preEnd,int inStart,int inEnd){
+//        if(preStart>preEnd||inStart>inEnd)return null;
+//        int root=pre[preStart];
+//        TreeNode node=new TreeNode(root);
+//        int inIndex=hm.get(root);
+//
+//        //
+//        node.left=build(preStart+1,preStart+inIndex-inStart,inStart,inIndex-1);
+//        node.right=build(preStart+inIndex-inStart+1,preEnd,inIndex+1,inEnd);
+//        return node;
+//
+//
+//    }
     public static void main(String[] args) {
 
         //输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]

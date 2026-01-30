@@ -9,23 +9,41 @@ import java.util.List;
  */
 public class No199 {
     private List<Integer> list;
-    public void dfsrightSideView(TreeNode root,int depth){
+    public void dfs(TreeNode root,int depth){
         if(root==null)return;
-        if(depth==list.size()){
+        if(list.size()==depth){
             list.add(root.val);
         }
-        dfsrightSideView(root.right,depth+1);
-        dfsrightSideView(root.left,depth+1);
+        dfs(root.right,depth+1);
+        dfs(root.left,depth+1);
+
     }
     public List<Integer> rightSideView(TreeNode root) {
         list=new ArrayList<>();
         if(root==null){
             return list;
         }
-        dfsrightSideView(root,0);
+        dfs(root,0);
         return list;
 
     }
+//    public void dfsrightSideView(TreeNode root,int depth){
+//        if(root==null)return;
+//        if(depth==list.size()){
+//            list.add(root.val);
+//        }
+//        dfsrightSideView(root.right,depth+1);
+//        dfsrightSideView(root.left,depth+1);
+//    }
+//    public List<Integer> rightSideView(TreeNode root) {
+//        list=new ArrayList<>();
+//        if(root==null){
+//            return list;
+//        }
+//        dfsrightSideView(root,0);
+//        return list;
+//
+//    }
 
     public static void main(String[] args) {
 

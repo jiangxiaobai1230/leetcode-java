@@ -5,6 +5,48 @@ package src.hot100;
  * @date: 2025-01-09 19:54
  */
 public class No189 {
+
+    public void rotate(int[] nums, int k) {
+        int n=nums.length;
+        k=k%n;
+        reverse(nums,0,n-k-1);
+        reverse(nums,n-k,n-1);
+        reverse(nums,0,n-1);
+
+    }
+    public void reverse(int[] nums,int begin,int end){
+        if(begin>end)return;
+        while (begin<=end){
+            int temp=nums[begin];
+            nums[begin]=nums[end];
+            nums[end]=temp;
+            begin++;
+            end--;
+        }
+    }
+
+
+
+//    public void rotate(int[] nums, int k) {
+//        int len=nums.length;
+//        if(len==1)return;
+//        k=k%len;
+//        reverse(nums,0,len-k-1);
+//        reverse(nums,len-k,len-1);
+//        reverse(nums,0,len-1);
+//
+//    }
+//
+//    void reverse(int[] nums,int begin,int end) {
+//        for (int i = begin; i <= (begin + end) / 2; i++) {
+//            int temp = nums[i];
+//            nums[i] = nums[end + begin - i];
+//            nums[end + begin - i] = temp;
+//
+//        }
+//    }
+
+
 //    public void rotate(int[] nums, int k) {
 //        int len=nums.length;
 //        int[] res=new int[len];
@@ -18,24 +60,24 @@ public class No189 {
 //
 //    }
 
-    public void rotate(int[] nums, int k) {
-        int len=nums.length;
-        k=k%len;
-        if(k==0)return;
-        reverse(nums,0,len-1);
-        reverse(nums,0,k-1);
-        reverse(nums,k,len-1);
-
-
-    }
-    void reverse(int[] nums,int begin,int end){
-        for(int i=begin;i<=(begin+end)/2;i++){
-            int temp=nums[i];
-            nums[i]=nums[end+begin-i];
-            nums[end+begin-i]=temp;
-
-        }
-    }
+//    public void rotate(int[] nums, int k) {
+//        int len=nums.length;
+//        k=k%len;
+//        if(k==0)return;
+//        reverse(nums,0,len-1);
+//        reverse(nums,0,k-1);
+//        reverse(nums,k,len-1);
+//
+//
+//    }
+//    void reverse(int[] nums,int begin,int end){
+//        for(int i=begin;i<=(begin+end)/2;i++){
+//            int temp=nums[i];
+//            nums[i]=nums[end+begin-i];
+//            nums[end+begin-i]=temp;
+//
+//        }
+//    }
 
     public static void main(String[] args) {
         //示例 1:

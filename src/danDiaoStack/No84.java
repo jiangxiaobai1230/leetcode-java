@@ -1,7 +1,6 @@
 package src.danDiaoStack;
 
-import java.util.Arrays;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * @author: Yuan Yuqing
@@ -19,24 +18,48 @@ public class No84 {
             newheights[i]=heights[i-1];
         }
         int res=0;
-        Stack<Integer> stack= new Stack<>();
-        stack.push(0);
-        for(int i=1;i<len+2;i++){
-            if(newheights[i]<newheights[stack.peek()]){
-                while (!stack.isEmpty()&&newheights[i]<newheights[stack.peek()]) {
-                    int curIndex=stack.pop();
-                    int width = i - stack.peek() - 1;
-                    res = Math.max(res, newheights[curIndex] * width);
-                }
+        Deque<Integer> deque=new LinkedList<>();
+        deque.addLast(0);
+        for(int i=1;i<=len+1;i++){
+            while (newheights[i]<newheights[deque.peekLast()]){
+                int curHeight=newheights[deque.pollLast()];
+                res=Math.max(res,curHeight*(i-deque.peekLast()-1));
             }
-            stack.push(i);
-
-
+            deque.addLast(i);
         }
-
         return res;
 
     }
+
+
+//    public int largestRectangleArea(int[] heights) {
+//        int len=heights.length;
+//        if(len==1)return heights[0];
+//        int[] newheights=new int[len+2];
+//        newheights[0]=0;
+//        newheights[len+1]=0;
+//        for(int i=1;i<len+1;i++){
+//            newheights[i]=heights[i-1];
+//        }
+//        int res=0;
+//        Stack<Integer> stack= new Stack<>();
+//        stack.push(0);
+//        for(int i=1;i<len+2;i++){
+//            if(newheights[i]<newheights[stack.peek()]){
+//                while (!stack.isEmpty()&&newheights[i]<newheights[stack.peek()]) {
+//                    int curIndex=stack.pop();
+//                    int width = i - stack.peek() - 1;
+//                    res = Math.max(res, newheights[curIndex] * width);
+//                }
+//            }
+//            stack.push(i);
+//
+//
+//        }
+//
+//        return res;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1:

@@ -9,40 +9,72 @@ import java.util.*;
 public class No207 {
     //https://leetcode.cn/problems/course-schedule/solutions/18806/course-schedule-tuo-bu-pai-xu-bfsdfsliang-chong-fa/comments/2299421
 
+
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        int[] indegrees=new int[numCourses];//每个课程的入度
-        Map<Integer, List<Integer>> adjacency=new HashMap();
-        for (int i=0;i<numCourses;i++) {
-            adjacency.put(i,new ArrayList<>());//每个课程维护一个list，用于存放后修课程
-        }
-        for (int[] prerequisite : prerequisites) {
-            indegrees[prerequisite[0]]++;//有先修课程，入度加一
-            adjacency.get(prerequisite[1]).add(prerequisite[0]);//在先修课程的list添加后修课程
-        }
+
+        int[] rudu=new int[numCourses];
+        HashMap<Integer,List<Integer>> houxuan=new HashMap<>();
         Queue<Integer> queue=new LinkedList<>();
-        for (int i=0;i<numCourses;i++) {
-            if (indegrees[i] == 0) {
-                queue.add(i);
-            }
-        }//将入度为0的课程放入队列
-        while(!queue.isEmpty()){
-            for(int i= queue.size();i>0;i--){
-                Integer poll = queue.poll();
-                numCourses--;
-                List<Integer> integers = adjacency.get(poll);//取出这个课程维护的list
-                for (Integer integer : integers) {
-                    indegrees[integer]--;//将list中的课程的入度-1
-                    if(indegrees[integer]==0){
-                        queue.add(integer);//如果入度为零则可以学习，加入到下一轮的队列中
-                    }
-                }
-            }
+        for(int i=0;i<numCourses;i++){
+            houxuan.put(i,new ArrayList<>());
+        }
+        for(int[] prerequisite:prerequisites){
+            rudu[prerequisite[0]]++;
+            houxuan.get(prerequisite[1]).add(prerequisite[0]);
 
         }
-        return numCourses == 0;
+        for(int i=0;i<numCourses;i++){
+            if(rudu[i]==0)queue.add(i);
+        }
+        while (!queue.isEmpty()){
+            for(int i=0;i<queue.size();i++){
+                int num= queue.poll();
+                numCourses--;
+                List<Integer> t=houxuan.get(num);
+                for(int s:t){
+                    rudu[s]--;
+                    if(rudu[s]==0)queue.add(s);
+                }
 
+            }
+        }
+        return numCourses==0;
 
     }
+//    public boolean canFinish(int numCourses, int[][] prerequisites) {
+//        int[] indegrees=new int[numCourses];//每个课程的入度
+//        Map<Integer, List<Integer>> adjacency=new HashMap();
+//        for (int i=0;i<numCourses;i++) {
+//            adjacency.put(i,new ArrayList<>());//每个课程维护一个list，用于存放后修课程
+//        }
+//        for (int[] prerequisite : prerequisites) {
+//            indegrees[prerequisite[0]]++;//有先修课程，入度加一
+//            adjacency.get(prerequisite[1]).add(prerequisite[0]);//在先修课程的list添加后修课程
+//        }
+//        Queue<Integer> queue=new LinkedList<>();
+//        for (int i=0;i<numCourses;i++) {
+//            if (indegrees[i] == 0) {
+//                queue.add(i);
+//            }
+//        }//将入度为0的课程放入队列
+//        while(!queue.isEmpty()){
+//            for(int i= queue.size();i>0;i--){
+//                Integer poll = queue.poll();
+//                numCourses--;
+//                List<Integer> integers = adjacency.get(poll);//取出这个课程维护的list
+//                for (Integer integer : integers) {
+//                    indegrees[integer]--;//将list中的课程的入度-1
+//                    if(indegrees[integer]==0){
+//                        queue.add(integer);//如果入度为零则可以学习，加入到下一轮的队列中
+//                    }
+//                }
+//            }
+//
+//        }
+//        return numCourses == 0;
+//
+//
+//    }
 
 
     public static void main(String[] args) {

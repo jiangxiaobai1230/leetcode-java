@@ -1,31 +1,61 @@
 package src.hash;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: Yuan Yuqing
  * @date: 2024-03-20 10:36
  */
 public class No1 {
-
     public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer,Integer> hashMap=new HashMap<>();
         int[] res=new int[2];
-        int count=0;
-
-        HashMap<Integer,Integer> visted=new HashMap<>();
         for(int i=0;i<nums.length;i++){
-            if(visted.containsKey(target-nums[i])){
-                res[count++]=i;
-                res[count]=visted.get(target-nums[i]);
-                break;
-
-            }else{
-                visted.put(nums[i],i);
+            if(hashMap.containsKey(target-nums[i])){
+                return new int[]{hashMap.get(target-nums[i]),i};
+            }else {
+                hashMap.put(nums[i],i);
             }
-        }
 
+        }
         return res;
+
     }
+
+
+//    public int[] twoSum(int[] nums, int target) {
+//        Map<Integer,Integer> map=new HashMap<>();
+//        int[] res=new int[2];
+//        for(int i=0;i<nums.length;i++){
+//            int num=nums[i];
+//            if(map.containsKey(target-num)){
+//                return new int[]{map.get(target-num),i};
+//            }else {
+//                map.put(num,i);
+//            }
+//        }
+//        return res;
+//    }
+
+//    public int[] twoSum(int[] nums, int target) {
+//        int[] res=new int[2];
+//        int count=0;
+//
+//        HashMap<Integer,Integer> visted=new HashMap<>();
+//        for(int i=0;i<nums.length;i++){
+//            if(visted.containsKey(target-nums[i])){
+//                res[count++]=i;
+//                res[count]=visted.get(target-nums[i]);
+//                break;
+//
+//            }else{
+//                visted.put(nums[i],i);
+//            }
+//        }
+//
+//        return res;
+//    }
 
     public static void main(String[] args) {
 

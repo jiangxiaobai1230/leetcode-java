@@ -1,23 +1,41 @@
 package src.BinaryTree;
 
+import src.LinkNode.ListNode;
+
 /**
  * @author: Yuan Yuqing
  * @date: 2024-04-23 10:34
  */
 public class No108 {
+
+
     public TreeNode sortedArrayToBST(int[] nums) {
+        return build(nums,0,nums.length-1);
 
-        return buildTree(nums,0,nums.length-1);
-    }
-    public TreeNode buildTree(int[] nums,int begin,int end){
-        if(begin>end)return null;
-        int mid=(begin+end)/2;
-        TreeNode root=new TreeNode(nums[mid]);
-        root.left=buildTree(nums,begin,mid-1);
-        root.right=buildTree(nums,mid+1,end);
-        return root;
 
     }
+    public TreeNode build(int[] nums,int left,int right){
+        if(left>right)return null;
+        int mid=(left+right)/2;
+        TreeNode cur=new TreeNode(nums[mid]);
+        cur.left=build(nums,left,mid-1);
+        cur.right=build(nums,mid+1,right);
+        return cur;
+    }
+
+//    public TreeNode sortedArrayToBST(int[] nums) {
+//
+//        return buildTree(nums,0,nums.length-1);
+//    }
+//    public TreeNode buildTree(int[] nums,int begin,int end){
+//        if(begin>end)return null;
+//        int mid=(begin+end)/2;
+//        TreeNode root=new TreeNode(nums[mid]);
+//        root.left=buildTree(nums,begin,mid-1);
+//        root.right=buildTree(nums,mid+1,end);
+//        return root;
+//
+//    }
 
     public static void main(String[] args) {
 

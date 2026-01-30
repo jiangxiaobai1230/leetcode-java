@@ -7,12 +7,13 @@ import src.BinaryTree.TreeNode;
  * @date: 2025-01-19 23:44
  */
 public class No114 {
+
+
     public void flatten(TreeNode root) {
         if(root==null)return;
-        while (root!=null){
-            if(root.left==null){
-                root=root.right;
-            }else {
+        while (root!=null) {
+            if (root.left == null) root = root.right;
+            else {
                 TreeNode node = root.left;
                 while (node.right != null) {
                     node = node.right;
@@ -22,10 +23,28 @@ public class No114 {
                 root.left = null;
                 root = root.right;
             }
-
         }
 
     }
+//    public void flatten(TreeNode root) {
+//        if(root==null)return;
+//        while (root!=null){
+//            if(root.left==null){
+//                root=root.right;
+//            }else {
+//                TreeNode node = root.left;
+//                while (node.right != null) {
+//                    node = node.right;
+//                }
+//                node.right = root.right;
+//                root.right = root.left;
+//                root.left = null;
+//                root = root.right;
+//            }
+//
+//        }
+//
+//    }
 
     public static void main(String[] args) {
         //输入：root = [1,2,5,3,4,null,6]

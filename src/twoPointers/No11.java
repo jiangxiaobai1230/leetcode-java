@@ -7,19 +7,42 @@ package src.twoPointers;
 public class No11 {
 
     public int maxArea(int[] height) {
-        int left=0,right=height.length-1,res=0;
+        int res=0,left=0,right=height.length-1;
         while (left<right){
-            if(height[left]<=height[right]){
-                res=Math.max(res,height[left]*(right-left));
-                left++;
-            }else {
-                res = Math.max(res, height[right] * (right - left));
-                right--;
-            }
+            res=Math.max(res,Math.min(height[left],height[right])*(right-left));
+            if(height[left]<height[right])left++;
+            else right--;
         }
-
         return res;
+
+
     }
+
+//    public int maxArea(int[] height) {
+//        int res=0,left=0,right=height.length-1;
+//        while (left<right){
+//            res=Math.max(res,(right-left)*Math.min(height[left],height[right]));
+//            if(height[left]<height[right])left++;
+//            else right--;
+//        }
+//
+//        return res;
+//    }
+
+//    public int maxArea(int[] height) {
+//        int left=0,right=height.length-1,res=0;
+//        while (left<right){
+//            if(height[left]<=height[right]){
+//                res=Math.max(res,height[left]*(right-left));
+//                left++;
+//            }else {
+//                res = Math.max(res, height[right] * (right - left));
+//                right--;
+//            }
+//        }
+//
+//        return res;
+//    }
 
     public static void main(String[] args) {
         //输入：[1,8,6,2,5,4,8,3,7]

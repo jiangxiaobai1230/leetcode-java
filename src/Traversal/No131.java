@@ -9,6 +9,7 @@ import java.util.Objects;
  * @date: 2024-04-26 19:10
  */
 public class No131 {
+
     private List<List<String>>  res=new ArrayList<>();
     private List<String> path=new ArrayList<>();
     public List<List<String>> partition(String s) {
@@ -22,11 +23,9 @@ public class No131 {
 
     }
     public void backTracking(String s,int index){
-
         if(index>=s.length()){
             res.add(new ArrayList<>(path));
             return;
-
         }
         for(int i=index;i<s.length();i++){
             if(isHuiWen(s.substring(index,i+1))){
@@ -34,8 +33,9 @@ public class No131 {
                 backTracking(s,i+1);
                 path.remove(path.size()-1);
             }
-
         }
+
+
 
     }
     public boolean isHuiWen(String s){
@@ -50,6 +50,47 @@ public class No131 {
         }
         return flag;
     }
+//    private List<List<String>>  res=new ArrayList<>();
+//    private List<String> path=new ArrayList<>();
+//    public List<List<String>> partition(String s) {
+//        if(s.length()==1) {
+//            path.add(s);
+//            res.add(path);
+//            return res;
+//        }
+//        backTracking(s,0);
+//        return res;
+//
+//    }
+//    public void backTracking(String s,int index){
+//
+//        if(index>=s.length()){
+//            res.add(new ArrayList<>(path));
+//            return;
+//
+//        }
+//        for(int i=index;i<s.length();i++){
+//            if(isHuiWen(s.substring(index,i+1))){
+//                path.add(s.substring(index,i+1));
+//                backTracking(s,i+1);
+//                path.remove(path.size()-1);
+//            }
+//
+//        }
+//
+//    }
+//    public boolean isHuiWen(String s){
+//        if("".equals(s))return false;
+//        boolean flag=true;
+//        for(int i=0;i<s.length()/2;i++){
+//            if(s.charAt(i)!=s.charAt(s.length()-1-i)){
+//                flag=false;
+//                break;
+//            }
+//
+//        }
+//        return flag;
+//    }
 
     public static void main(String[] args) {
 

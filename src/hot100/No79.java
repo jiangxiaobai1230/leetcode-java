@@ -8,38 +8,68 @@ package src.hot100;
 //https://leetcode.cn/problems/word-search/solutions/2927294/liang-ge-you-hua-rang-dai-ma-ji-bai-jie-g3mmm/?envType=study-plan-v2&envId=top-100-liked
 
 public class No79 {
+
     private static final int[][] DIRS = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
     public boolean exist(char[][] board, String word) {
-        int m = board.length;
-        int n = board[0].length;
-        char[] w=word.toCharArray();
+        int m=board.length;
+        int n=board[0].length;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-                if(dfs(board,w,i,j,0)){
+                if(dfs(board,word,i,j,0)){
                     return true;
                 }
             }
         }
         return false;
-
-
-
     }
-    public boolean dfs(char[][] board,char[] word,int i,int j,int k){
-        if(board[i][j]!=word[k])return false;
-        if(k==word.length-1)return true;
+    public boolean dfs(char[][] board, String word,int i,int j,int k){
+        if(board[i][j]!=word.charAt(k))return false;
+        if(k==word.length()-1)return true;
         board[i][j]=0;
-        for(int[] d:DIRS){
-            int x=i+d[0];
-            int y=j+d[1];
+        for(int[] c:DIRS){
+            int x=i+c[0];
+            int y=j+c[1];
             if(x>=0&&x<board.length&&y>=0&&y<board[0].length&&dfs(board,word,x,y,k+1)){
                 return true;
             }
-        }
-        board[i][j]=word[k];
-        return false;
 
+        }
+        board[i][j]=word.charAt(k);
+        return false;
     }
+
+//    private static final int[][] DIRS = {{0, -1}, {0, 1}, {-1, 0}, {1, 0}};
+//    public boolean exist(char[][] board, String word) {
+//        int m = board.length;
+//        int n = board[0].length;
+//        char[] w=word.toCharArray();
+//        for(int i=0;i<m;i++){
+//            for(int j=0;j<n;j++){
+//                if(dfs(board,w,i,j,0)){
+//                    return true;
+//                }
+//            }
+//        }
+//        return false;
+//
+//
+//
+//    }
+//    public boolean dfs(char[][] board,char[] word,int i,int j,int k){
+//        if(board[i][j]!=word[k])return false;
+//        if(k==word.length-1)return true;
+//        board[i][j]=0;
+//        for(int[] d:DIRS){
+//            int x=i+d[0];
+//            int y=j+d[1];
+//            if(x>=0&&x<board.length&&y>=0&&y<board[0].length&&dfs(board,word,x,y,k+1)){
+//                return true;
+//            }
+//        }
+//        board[i][j]=word[k];
+//        return false;
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

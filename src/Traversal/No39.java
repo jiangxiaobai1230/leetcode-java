@@ -10,31 +10,56 @@ import java.util.List;
  */
 public class No39 {
     private List<List<Integer>> res=new ArrayList<>();
-    private List<Integer> sumList=new ArrayList<>();
+    private List<Integer> path=new ArrayList<>();
+    private int[] candidates;
     private int sum=0;
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        backtracking(candidates,target,0);
-//        Arrays.sort(candidates);
+        this.candidates=candidates;
+        backtracing(0,target);
         return res;
-
     }
-    public void backtracking(int[] candidates,int target,int index){
+    public void backtracing(int index,int target){
         if(sum==target){
-            res.add(new ArrayList<>(sumList));
+            res.add(new ArrayList<>(path));
             return;
         }
-        if(sum>target)return;
-
+        if (sum>target) return;
         for(int i=index;i<candidates.length;i++){
             sum+=candidates[i];
-            sumList.add(candidates[i]);
-            backtracking(candidates,target,i);
-            sumList.remove(sumList.size()-1);
+            path.add(candidates[i]);
+            backtracing(i,target);
+            path.remove(path.size()-1);
             sum-=candidates[i];
         }
-
     }
+
+//    private List<List<Integer>> res=new ArrayList<>();
+//    private List<Integer> sumList=new ArrayList<>();
+//    private int sum=0;
+//
+//    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+//        backtracking(candidates,target,0);
+////        Arrays.sort(candidates);
+//        return res;
+//
+//    }
+//    public void backtracking(int[] candidates,int target,int index){
+//        if(sum==target){
+//            res.add(new ArrayList<>(sumList));
+//            return;
+//        }
+//        if(sum>target)return;
+//
+//        for(int i=index;i<candidates.length;i++){
+//            sum+=candidates[i];
+//            sumList.add(candidates[i]);
+//            backtracking(candidates,target,i);
+//            sumList.remove(sumList.size()-1);
+//            sum-=candidates[i];
+//        }
+//
+//    }
     public static void main(String[] args) {
 
         //示例 1：

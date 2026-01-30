@@ -8,36 +8,65 @@ import java.util.Stack;
  */
 public class No394 {
     //https://leetcode.cn/problems/decode-string/solutions/19447/decode-string-fu-zhu-zhan-fa-di-gui-fa-by-jyd/comments/1233118
+
+
     public String decodeString(String s) {
-        Stack<StringBuilder> restack = new Stack<>();
-        Stack<Integer> kstack = new Stack<>();
-        StringBuilder res = new StringBuilder();
+        Stack<StringBuilder> charStack=new Stack<>();
+        Stack<Integer> numStack=new Stack<>();
         int k=0;
+        StringBuilder res=new StringBuilder();
         for (char c:s.toCharArray()){
-            if (c=='[') {
-                kstack.push(k);
-                restack.push(res);
+            if(c>='0'&&c<='9'){
+                k=k*10+c-'0';
+            } else if (c=='[') {
+                numStack.push(k);
+                charStack.push(res);
                 k=0;
                 res=new StringBuilder();
-            }
-            else if(c==']'){
-                int curk=kstack.pop();
-                StringBuilder temp = new StringBuilder();
-                for(int i = 0; i < curk; i++){
-                    temp.append(res);
+            } else if (c==']') {
+                int curK=numStack.pop();
+                StringBuilder t=new StringBuilder();
+                for(int i=0;i<curK;i++){
+                    t.append(res);
                 }
-                res=restack.pop().append(temp);
-            }
-            else if(c>='0'&&c<='9'){
-                k=c-'0'+k*10;
-            }
-            else{
-                res.append(c);
-            }
+                res=charStack.pop().append(t);
+            }else res.append(c);
+
         }
         return res.toString();
 
+
     }
+//    public String decodeString(String s) {
+//        Stack<StringBuilder> restack = new Stack<>();
+//        Stack<Integer> kstack = new Stack<>();
+//        StringBuilder res = new StringBuilder();
+//        int k=0;
+//        for (char c:s.toCharArray()){
+//            if (c=='[') {
+//                kstack.push(k);
+//                restack.push(res);
+//                k=0;
+//                res=new StringBuilder();
+//            }
+//            else if(c==']'){
+//                int curk=kstack.pop();
+//                StringBuilder temp = new StringBuilder();
+//                for(int i = 0; i < curk; i++){
+//                    temp.append(res);
+//                }
+//                res=restack.pop().append(temp);
+//            }
+//            else if(c>='0'&&c<='9'){
+//                k=c-'0'+k*10;
+//            }
+//            else{
+//                res.append(c);
+//            }
+//        }
+//        return res.toString();
+//
+//    }
 
     public static void main(String[] args) {
         //示例 1：

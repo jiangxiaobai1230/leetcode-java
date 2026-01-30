@@ -10,23 +10,60 @@ import java.util.HashSet;
 public class No128 {
 
     public int longestConsecutive(int[] nums) {
-        if(nums.length==0)return 0;
-        HashSet<Integer> hashSet=new HashSet<>();
-        int res=1;
-        for(int i=0;i<nums.length;i++){
-            hashSet.add(nums[i]);
+        int res=0;
+        HashSet<Integer> candidates=new HashSet<>();
+        for(int num:nums){
+            candidates.add(num);
         }
-        for(Integer num:hashSet){
-            if(!hashSet.contains(num-1)){
-                int count=1;
-                while (hashSet.contains(num+count)){
-                    count++;
+        for(int num:candidates) {
+            if (!candidates.contains(num - 1)){
+                int length=1;
+                while (candidates.contains(num+length)){
+                    length++;
                 }
-                res=Math.max(res,count);
+                res=Math.max(res,length);
             }
         }
+
         return res;
     }
+
+//    public int longestConsecutive(int[] nums) {
+//        int res=0;
+//        HashSet<Integer> hashSet=new HashSet<>();
+//        for(int num:nums){
+//            hashSet.add(num);
+//        }
+//        for(int num:hashSet){
+//            if(!hashSet.contains(num-1)) {
+//                int cur = 1;
+//                while (hashSet.contains(num+cur)) {
+//                    cur++;
+//                }
+//                res=Math.max(res,cur);
+//            }
+//        }
+//      return res;
+//    }
+
+//    public int longestConsecutive(int[] nums) {
+//        if(nums.length==0)return 0;
+//        HashSet<Integer> hashSet=new HashSet<>();
+//        int res=1;
+//        for(int i=0;i<nums.length;i++){
+//            hashSet.add(nums[i]);
+//        }
+//        for(Integer num:hashSet){
+//            if(!hashSet.contains(num-1)){
+//                int count=1;
+//                while (hashSet.contains(num+count)){
+//                    count++;
+//                }
+//                res=Math.max(res,count);
+//            }
+//        }
+//        return res;
+//    }
 
     public static void main(String[] args) {
 
