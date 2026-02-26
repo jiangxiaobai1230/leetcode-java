@@ -8,25 +8,45 @@ public class N0142 {
     //这个题目太难了，只能理解加上背了。。。。感觉做题还得有个草稿本才行
 
     public ListNode detectCycle(ListNode head) {
-        if(head==null||head.next==null){
-            return null;
-        }
-        ListNode fast=head, low=head;
-        while(fast!=null&&fast.next!=null) {
-            low=low.next;
+        if(head==null||head.next==null)return null;
+        ListNode slow=head,fast=head;
+        while (fast!=null&&fast.next!=null){
             fast=fast.next.next;
-            if(fast==low){
+            slow=slow.next;
+            if(fast==slow){
                 fast=head;
-                while (low!=fast){
-                    low=low.next;
+                while (fast!=slow){
                     fast=fast.next;
-
+                    slow=slow.next;
                 }
-                return low;
+                return slow;
+
             }
         }
         return null;
     }
+
+
+//    public ListNode detectCycle(ListNode head) {
+//        if(head==null||head.next==null){
+//            return null;
+//        }
+//        ListNode fast=head, low=head;
+//        while(fast!=null&&fast.next!=null) {
+//            low=low.next;
+//            fast=fast.next.next;
+//            if(fast==low){
+//                fast=head;
+//                while (low!=fast){
+//                    low=low.next;
+//                    fast=fast.next;
+//
+//                }
+//                return low;
+//            }
+//        }
+//        return null;
+//    }
 
 //    public ListNode detectCycle(ListNode head) {
 //        if(head==null||head.next==null){

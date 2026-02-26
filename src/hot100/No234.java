@@ -9,31 +9,36 @@ import java.util.List;
  * @date: 2025-01-12 22:33
  */
 public class No234 {
+
     public boolean isPalindrome(ListNode head) {
-        if(head==null||head.next==null)return true;
-        ListNode slow=head,fast=head,pre=null,cur=head;
-        while (fast!=null&&fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
 
-            cur.next=pre;
-            pre=cur;
-            cur=slow;
 
-        }
-        if(fast!=null){
-            cur=cur.next;
-        }
-        while (pre!=null&&cur!=null){
-            if(pre.val!=cur.val)return false;
-            else {
-                pre=pre.next;
-                cur=cur.next;
-            }
-        }
-
-        return true;
     }
+//    public boolean isPalindrome(ListNode head) {
+//        if(head==null||head.next==null)return true;
+//        ListNode slow=head,fast=head,pre=null,cur=head;
+//        while (fast!=null&&fast.next!=null){
+//            slow=slow.next;
+//            fast=fast.next.next;
+//
+//            cur.next=pre;
+//            pre=cur;
+//            cur=slow;
+//
+//        }
+//        if(fast!=null){
+//            cur=cur.next;
+//        }
+//        while (pre!=null&&cur!=null){
+//            if(pre.val!=cur.val)return false;
+//            else {
+//                pre=pre.next;
+//                cur=cur.next;
+//            }
+//        }
+//
+//        return true;
+//    }
 //    public boolean isPalindrome(ListNode head) {
 //        if(head==null||head.next==null)return true;
 //        ListNode slow=head,fast=head,cur=head,pre=null;
